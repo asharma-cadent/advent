@@ -18,6 +18,32 @@ th, td {
 	        var feedJsonArray = [[${feedJsonArray}]];
 	       // alert(feedJsonArray[0].date + " "+ feedJsonArray[0].feedData);
         /*]]>*/
+        
+    //Populate the drop down with all the feed names
+	function processFeedSelection() {
+        redrawTimeLine();
+    }
+        
+    function processDateSelection() {
+    	redrawTimeLine();
+    }
+    
+    function redrawTimeLine(){
+        var feedSelectField = document.getElementById("feed_id");
+        var bulletinDateField = document.getElementById("bulletin_date");
+    	var selectedFeedValue = feedSelectField.value;
+    	var selectedDateValue = bulletinDateField.value;
+    	alert(selectedFeedValue + selectedDateValue);
+    }
+    
+    function loadFeedAndDateFields(){
+        var feedSelectField = document.getElementById("feed_id");
+        var bulletinDateField = document.getElementById("bulletin_date");
+        feedJsonArray
+        var mySet = new Set();
+        var uniqueArray = Array.from(mySet);
+    }
+        
 </script>
 
 <!--Load the AJAX API-->
@@ -229,8 +255,24 @@ th, td {
 </script>
 </head>
 
-<body>
+<body onload="loadFeedAndDateFields()">
 	<!--Div that will hold the pie chart-->
+	<div id="filters">
+		<table width="50%">
+			<tr>
+				<th>
+					Feed:
+						<select name="feed_id" id="feed_id" onchange="processFeedSelection()">
+							<option value="-select-">-Select-</option>
+						</select>
+				</th>
+				<th style="align-content:left">
+					Date:
+						<input type="date" id="bulletin_date" name="bulletin_date" onchange="processDateSelection()"/>
+				</th>
+			</tr>
+		</table>
+	</div>
    	<div id="chart_div"></div>
    	<table width="100%">
    		<tr>
