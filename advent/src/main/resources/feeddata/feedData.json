@@ -1,90 +1,106 @@
 [
-	{
-		"date": "12/16/2020",
-		"feedName": "NBC Universal",
-		"feedData": 
-			{
-				"zonedBreakData": [
-					{
-						"zoneId": "275",
-						"breakData": [
-							{
-								"scheduleDate": "12/16/2020",
-								"scheduleTime": "",
-								"windowStartTime": "",
-								"windowDuration": "",
-								"windowEndTime": "",
-								"breakNumberWithinWindow": "",
-								"positionNumberWithinBreak": "",
-								"spotId": "",
-								"creative": "",
-								"breakConfirmationTime": "",
-								"breakStatus": ""
-							}
-						]
-					}
-				],
-				"altConData": [
-					{
-						"programName": "Baseball Tonight",
-						"restrictedZips": [
-							{
-								"zipCode": [
-									"94560",
-									"94561",
-									"94562",
-									"94582",
-									"95112"
-								],
-								"zipLatitude": 123.45,
-								"zipLongitude": 456.78
-							}
-						],
-						"restrictedDevices": [
-							"TABLET",
-							"PHONE"
-						],
-						"streamConditioningStatus": [
-							{
-								"streamId": "",
-								"eventStartSignalTime": "12/16/2020 09:00PT",
-								"eventEndSignalTime": "12/08/2020 10:00PT",
-								"status": "Pending",
-								"executionType": "IP"
-							}
-						]
-					},
-					{
-						"programName": "College Football Final",
-						"restrictedZips": [
-							{
-								"zipCode": [
-									"86442",
-									"86413",
-									"86431",
-									
-									"86439"
-								],
-								"zipLatitude": 123.45,
-								"zipLongitude": 456.78
-							}
-						],
-						"restrictedDevices": [
-							"TABLET",
-							"PHONE"
-						],
-						"streamConditioningStatus": [
-							{
-								"streamId": "",
-								"eventStartSignalTime": "12/16/2020 09:00PT",
-								"eventEndSignalTime": "12/08/2020 10:00PT",
-								"status": "Pending",
-								"executionType": "IP"
-							}
-						]
-					}
-				]
-			}
-		
-	}
+  {
+    "date": "12/16/2020",
+    "feedName": "NBC Universal",
+    "feedData": {
+      "zonedBreakData": [
+        {
+          "zoneId": "275",
+          "breakData": [
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "",
+              "windowStartTime": "",
+              "windowDuration": "",
+              "windowEndTime": "",
+              "breakNumberWithinWindow": "",
+              "positionNumberWithinBreak": "",
+              "spotId": "",
+              "creative": "",
+              "breakConfirmationTime": "",
+              "breakStatus": ""
+            }
+          ]
+        }
+      ],
+      "altConData": [
+        {
+          "programName": "Baseball Tonight",
+          "restrictedZips": [
+            {
+              "zipCode": "94560",
+              "zipLatitude": 1.2,
+              "zipLongitude": 3.4
+            },
+            {
+              "zipCode": "94561",
+              "zipLatitude": 1.2,
+              "zipLongitude": 3.4
+            },
+            {
+              "zipCode": "94562",
+              "zipLatitude": 1.2,
+              "zipLongitude": 3.4
+            },
+            {
+              "zipCode": "95112",
+              "zipLatitude": 1.2,
+              "zipLongitude": 3.4
+            }
+          ],
+          "restrictedDevices": [
+            "TABLET",
+            "PHONE"
+          ],
+          "streamConditioningStatus": [
+            {
+              "streamId": "",
+              "eventStartSignalTime": "12/16/2020 09:00PT",
+              "eventEndSignalTime": "12/08/2020 10:00PT",
+              "status": "Pending",
+              "executionType": "IP"
+            }
+          ]
+        },
+        {
+          "programName": "College Football Final",
+          "restrictedZips": [
+            {
+              "zipCode": "86442",
+              "zipLatitude": 1.2,
+              "zipLongitude": 3.4
+            },
+            {
+              "zipCode": "86413",
+              "zipLatitude": 1.2,
+              "zipLongitude": 3.4
+            },
+            {
+              "zipCode": "86413",
+              "zipLatitude": 1.2,
+              "zipLongitude": 3.4
+            },
+            {
+              "zipCode": "86431",
+              "zipLatitude": 1.2,
+              "zipLongitude": 3.4
+            }
+          ],
+          "restrictedDevices": [
+            "TABLET",
+            "PHONE"
+          ],
+          "streamConditioningStatus": [
+            {
+              "streamId": "",
+              "eventStartSignalTime": "12/16/2020 09:00PT",
+              "eventEndSignalTime": "12/08/2020 10:00PT",
+              "status": "Pending",
+              "executionType": "IP"
+            }
+          ]
+        }
+      ]
+    }
+  }
 ]
