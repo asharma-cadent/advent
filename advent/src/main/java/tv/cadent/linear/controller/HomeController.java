@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -65,8 +66,38 @@ public class HomeController {
 	private void getFeedData(Model model) {
 		try {
 			Resource resource = resourceLoader.getResource("classpath:feeddata/feedData.json");
-			JSONArray feedDataArray = (JSONArray)new JSONParser().parse(Files.readString(Paths.get(resource.getURI())));
-			model.addAttribute("feedJsonArray", feedDataArray);
+			JSONArray feedDataRowArray = (JSONArray)new JSONParser().parse(Files.readString(Paths.get(resource.getURI())));
+			if(feedDataRowArray!=null) {
+				for(int i=0; i < feedDataRowArray.size(); i++) {
+					JSONObject feedDataRow = (JSONObject)feedDataRowArray.get(i);
+					if(feedDataRow.containsKey("feedData")) {
+						JSONObject feedData = (JSONObject)feedDataRow.get("feedData");
+						if(feedData!= null && feedData.containsKey("altConData")) {
+							JSONArray altConDataArray = (JSONArray) feedData.get("altConData");
+							if(altConDataArray!=null) {
+								for(int j=0;j<altConDataArray.size();j++) {
+									JSONObject altConData = (JSONObject) altConDataArray.get(j);
+									if(altConData !=null && altConData.containsKey("restrictedZips")) {
+										JSONArray restrictedZipsArray = (JSONArray) altConData.get("restrictedZips");
+										if(restrictedZipsArray!=null) {
+											for(int k=0;k<restrictedZipsArray.size();k++) {
+												JSONObject restrictedZip = (JSONObject) restrictedZipsArray.get(k);
+												Float[] latLong = geoLatLongs.get(restrictedZip.get("zipCode"));
+												if(latLong!=null) {
+													restrictedZip.put("zipLatitude", latLong[0]);
+													restrictedZip.put("zipLongitude", latLong[1]);
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			model.addAttribute("feedJsonArray", feedDataRowArray);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

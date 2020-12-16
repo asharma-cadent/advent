@@ -38,7 +38,7 @@
               "zipLongitude": 3.4
             },
             {
-              "zipCode": "94562",
+              "zipCode": "94582",
               "zipLatitude": 1.2,
               "zipLongitude": 3.4
             },
@@ -67,11 +67,6 @@
           "restrictedZips": [
             {
               "zipCode": "86442",
-              "zipLatitude": 1.2,
-              "zipLongitude": 3.4
-            },
-            {
-              "zipCode": "86413",
               "zipLatitude": 1.2,
               "zipLongitude": 3.4
             },
