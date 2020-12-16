@@ -85,7 +85,7 @@ th, td {
     	 for (j = 0; j < zoneBreakDataItr.length; j++) {    		 
     		 var startHourMinutSecArr = zoneBreakDataItr[j].windowStartTime.split(" ")[1].split(":");
     		 var endHourMinutSecArr = zoneBreakDataItr[j].windowEndTime.split(" ")[1].split(":");    			
-    			arr.push([ 'Zone('+zoneLocal+")" , zoneBreakDataItr[j].spotId, zoneBreakDataItr[j].breakStatus, new Date(0, 0, 0, startHourMinutSecArr[0], startHourMinutSecArr[1],startHourMinutSecArr[2]), new Date(0, 0, 0, endHourMinutSecArr[0], endHourMinutSecArr[1],endHourMinutSecArr[2]) ]);
+    			arr.push([ 'CCMS AdZone('+zoneLocal+")" , zoneBreakDataItr[j].spotId, zoneBreakDataItr[j].breakStatus, new Date(0, 0, 0, startHourMinutSecArr[0], startHourMinutSecArr[1],startHourMinutSecArr[2]), new Date(0, 0, 0, endHourMinutSecArr[0], endHourMinutSecArr[1],endHourMinutSecArr[2]) ]);
     	 }
 	} 
     dataTable.addRows(arr);
