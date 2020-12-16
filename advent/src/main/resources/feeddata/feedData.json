@@ -1,7 +1,7 @@
 [
   {
     "date": "12/16/2020",
-    "feedName": "NBC Universal",
+    "feedName": "ESPN",
     "feedData": {
       "zonedBreakData": [
         {
@@ -9,16 +9,247 @@
           "breakData": [
             {
               "scheduleDate": "12/16/2020",
-              "scheduleTime": "",
-              "windowStartTime": "",
-              "windowDuration": "",
-              "windowEndTime": "",
-              "breakNumberWithinWindow": "",
-              "positionNumberWithinBreak": "",
-              "spotId": "",
-              "creative": "",
-              "breakConfirmationTime": "",
-              "breakStatus": ""
+              "scheduleTime": "12/16/2020 16:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 16:00:00.000 GMT",
+              "windowDuration": "00:05:00",
+              "windowEndTime": "12/16/2020 16:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001586618",
+              "creative": "Diner Cherokee",
+              "breakConfirmationTime": "12/16/2020 16:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            },
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 17:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 17:00:00.000 GMT",
+              "windowDuration": "00:05:00",
+              "windowEndTime": "12/16/2020 17:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001586619",
+              "creative": "Pepsi",
+              "breakConfirmationTime": "12/16/2020 17:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            },
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 18:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 18:00:00.000 GMT",
+              "windowDuration": "00:05:00",
+              "windowEndTime": "12/16/2020 18:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001586619",
+              "creative": "Pepsi",
+              "breakConfirmationTime": "12/16/2020 18:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            },
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 19:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 19:00:00.000 GMT",
+              "windowDuration": "00:05:00",
+              "windowEndTime": "12/16/2020 19:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001586619",
+              "creative": "Pepsi",
+              "breakConfirmationTime": "12/16/2020 19:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            },
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 20:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 20:00:00.000 GMT",
+              "windowDuration": "00:05:00",
+              "windowEndTime": "12/16/2020 20:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001586619",
+              "creative": "Pepsi",
+              "breakConfirmationTime": "12/16/2020 20:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            },
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 21:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 21:00:00.000 GMT",
+              "windowDuration": "21:05:00",
+              "windowEndTime": "12/16/2020 21:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001586619",
+              "creative": "Coke",
+              "breakConfirmationTime": "12/16/2020 21:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            }
+          ]
+        },
+        {
+          "zoneId": "376",
+          "breakData": [
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 16:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 16:00:00.000 GMT",
+              "windowDuration": "00:05:00",
+              "windowEndTime": "12/16/2020 16:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001586518",
+              "creative": "Macys",
+              "breakConfirmationTime": "12/16/2020 16:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            },
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 17:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 17:00:00.000 GMT",
+              "windowDuration": "00:05:00",
+              "windowEndTime": "12/16/2020 17:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001586519",
+              "creative": "Coke",
+              "breakConfirmationTime": "12/16/2020 17:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            },
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 18:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 18:00:00.000 GMT",
+              "windowDuration": "00:05:00",
+              "windowEndTime": "12/16/2020 18:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001586519",
+              "creative": "Coke",
+              "breakConfirmationTime": "12/16/2020 18:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            },
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 19:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 19:00:00.000 GMT",
+              "windowDuration": "00:05:00",
+              "windowEndTime": "12/16/2020 19:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001586519",
+              "creative": "Coke",
+              "breakConfirmationTime": "12/16/2020 19:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            },
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 20:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 20:00:00.000 GMT",
+              "windowDuration": "00:05:00",
+              "windowEndTime": "12/16/2020 20:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001586519",
+              "creative": "Coke",
+              "breakConfirmationTime": "12/16/2020 20:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            },
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 21:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 21:00:00.000 GMT",
+              "windowDuration": "21:05:00",
+              "windowEndTime": "12/16/2020 21:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001586619",
+              "creative": "Coke",
+              "breakConfirmationTime": "12/16/2020 21:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            }
+          ]
+        },
+        {
+          "zoneId": "333",
+          "breakData": [
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 16:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 16:00:00.000 GMT",
+              "windowDuration": "00:05:00",
+              "windowEndTime": "12/16/2020 16:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001452331",
+              "creative": "Diner Cherokee",
+              "breakConfirmationTime": "12/16/2020 16:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            },
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 17:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 17:00:00.000 GMT",
+              "windowDuration": "00:05:00",
+              "windowEndTime": "12/16/2020 17:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001452331",
+              "creative": "Diner Cherokee",
+              "breakConfirmationTime": "12/16/2020 17:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            },
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 18:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 18:00:00.000 GMT",
+              "windowDuration": "00:05:00",
+              "windowEndTime": "12/16/2020 18:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001452331",
+              "creative": "Diner Cherokee",
+              "breakConfirmationTime": "12/16/2020 18:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            },
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 19:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 19:00:00.000 GMT",
+              "windowDuration": "00:05:00",
+              "windowEndTime": "12/16/2020 19:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001452331",
+              "creative": "Diner Cherokee",
+              "breakConfirmationTime": "12/16/2020 19:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            },
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 20:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 20:00:00.000 GMT",
+              "windowDuration": "00:05:00",
+              "windowEndTime": "12/16/2020 20:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001452331",
+              "creative": "Diner Cherokee",
+              "breakConfirmationTime": "12/16/2020 20:00:00.000 GMT",
+              "breakStatus": "Confirmed"
+            },
+            {
+              "scheduleDate": "12/16/2020",
+              "scheduleTime": "12/16/2020 21:00:00.000 GMT",
+              "windowStartTime": "12/16/2020 21:00:00.000 GMT",
+              "windowDuration": "21:05:00",
+              "windowEndTime": "12/16/2020 21:05:00.000 GMT",
+              "breakNumberWithinWindow": "01",
+              "positionNumberWithinBreak": "01",
+              "spotId": "0001452331",
+              "creative": "Diner Cherokee",
+              "breakConfirmationTime": "12/16/2020 21:00:00.000 GMT",
+              "breakStatus": "Confirmed"
             }
           ]
         }
@@ -29,23 +260,28 @@
           "restrictedZips": [
             {
               "zipCode": "94560",
-              "zipLatitude": 1.2,
-              "zipLongitude": 3.4
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
             },
             {
               "zipCode": "94561",
-              "zipLatitude": 1.2,
-              "zipLongitude": 3.4
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            },
+            {
+              "zipCode": "94562",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
             },
             {
               "zipCode": "94582",
-              "zipLatitude": 1.2,
-              "zipLongitude": 3.4
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
             },
             {
               "zipCode": "95112",
-              "zipLatitude": 1.2,
-              "zipLongitude": 3.4
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
             }
           ],
           "restrictedDevices": [
@@ -55,8 +291,8 @@
           "streamConditioningStatus": [
             {
               "streamId": "",
-              "eventStartSignalTime": "12/16/2020 09:00PT",
-              "eventEndSignalTime": "12/08/2020 10:00PT",
+              "eventStartSignalTime": "12/16/2020 17:00:00.000 GMT",
+              "eventEndSignalTime": "12/16/2020 18:00:00.000 GMT",
               "status": "Pending",
               "executionType": "IP"
             }
@@ -66,19 +302,29 @@
           "programName": "College Football Final",
           "restrictedZips": [
             {
-              "zipCode": "86442",
-              "zipLatitude": 1.2,
-              "zipLongitude": 3.4
-            },
-            {
               "zipCode": "86413",
-              "zipLatitude": 1.2,
-              "zipLongitude": 3.4
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
             },
             {
               "zipCode": "86431",
-              "zipLatitude": 1.2,
-              "zipLongitude": 3.4
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            },
+            {
+              "zipCode": "86439",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            },
+            {
+              "zipCode": "86442",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            },
+            {
+              "zipCode": "86445",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
             }
           ],
           "restrictedDevices": [
@@ -88,9 +334,138 @@
           "streamConditioningStatus": [
             {
               "streamId": "",
-              "eventStartSignalTime": "12/16/2020 09:00PT",
-              "eventEndSignalTime": "12/08/2020 10:00PT",
-              "status": "Pending",
+              "eventStartSignalTime": "18/16/2020 18:30:00.000 GMT",
+              "eventEndSignalTime": "12/16/2020 19:00:00.000 GMT",
+              "status": "Confirmed",
+              "executionType": "IP"
+            }
+          ]
+        },
+        {
+          "programName": "NBA Countdown",
+          "restrictedZips": [
+            {
+              "zipCode": "97411",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            },
+            {
+              "zipCode": "97420",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            },
+            {
+              "zipCode": "97423",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            },
+            {
+              "zipCode": "97424",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            },
+            {
+              "zipCode": "97432",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            }
+          ],
+          "restrictedDevices": [
+            "TABLET",
+            "PHONE"
+          ],
+          "streamConditioningStatus": [
+            {
+              "streamId": "",
+              "eventStartSignalTime": "18/16/2020 20:00:00.000 GMT",
+              "eventEndSignalTime": "12/16/2020 21:00:00.000 GMT",
+              "status": "Confirmed",
+              "executionType": "IP"
+            }
+          ]
+        },
+        {
+          "programName": "NFL Matchup",
+          "restrictedZips": [
+            {
+              "zipCode": "75001",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            },
+            {
+              "zipCode": "75002",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            },
+            {
+              "zipCode": "75006",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            },
+            {
+              "zipCode": "75010",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            },
+            {
+              "zipCode": "75011",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            }
+          ],
+          "restrictedDevices": [
+            "TABLET",
+            "PHONE"
+          ],
+          "streamConditioningStatus": [
+            {
+              "streamId": "",
+              "eventStartSignalTime": "18/16/2020 21:30:00.000 GMT",
+              "eventEndSignalTime": "12/16/2020 22:00:00.000 GMT",
+              "status": "Confirmed",
+              "executionType": "IP"
+            }
+          ]
+        },
+        {
+          "programName": "NFL Primetime",
+          "restrictedZips": [
+            {
+              "zipCode": "53001",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            },
+            {
+              "zipCode": "53004",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            },
+            {
+              "zipCode": "53008",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            },
+            {
+              "zipCode": "53010",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            },
+            {
+              "zipCode": "53020",
+              "zipLatitude": 123.45,
+              "zipLongitude": 456.78
+            }
+          ],
+          "restrictedDevices": [
+            "TABLET",
+            "PHONE"
+          ],
+          "streamConditioningStatus": [
+            {
+              "streamId": "",
+              "eventStartSignalTime": "18/16/2020 22:00:00.000 GMT",
+              "eventEndSignalTime": "12/16/2020 23:30:00.000 GMT",
+              "status": "Confirmed",
               "executionType": "IP"
             }
           ]
