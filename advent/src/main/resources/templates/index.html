@@ -1,0 +1,274 @@
+<html xmlns="http://thymeleaf.org">
+
+<head>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"	type="text/css"></link>
+<link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css"></link>
+<style>
+th, td {
+  padding: 15px;
+  white-space:nowrap;
+}
+</style>
+<title>Linear Feed Timeline</title>
+<script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+	        //the list converts as a javascript object
+	        var latlongMappings = /*[[${latlongMappings}]]*/;
+	        var restrictedDevices = /*[[${restrictedDevices}]]*/;
+        /*]]>*/
+</script>
+
+<!--Load the AJAX API-->
+<script type="text/javascript"	src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+
+  //Load the Visualization API and the timeline package.
+  google.charts.load("current", {packages:["timeline"]});
+  
+  //Set a callback to run when the Google Visualization API is loaded.
+  google.charts.setOnLoadCallback(drawChart);
+  
+  // Callback that creates and populates a data table, instantiates the timeline chart, passes in the data and
+  // draws it.
+  function drawChart() {
+
+    var dataTable = new google.visualization.DataTable();
+    dataTable.addColumn({ type: 'string', id: 'Position' });
+    dataTable.addColumn({ type: 'string', id: 'Name' });
+    dataTable.addColumn({ type: 'string', role: 'tooltip' });
+    dataTable.addColumn({ type: 'date', id: 'Start' });
+    dataTable.addColumn({ type: 'date', id: 'End' });
+    dataTable.addRows([
+      [ 'Alternate Content', '/disney.com/media/presidentialDebateLive', createCustomHTMLContentProg1(), new Date(0, 0, 0, 0, 30, 0), new Date(0, 0, 0, 1, 30, 0) ],
+      [ 'Alternate Content', '/disney.com/media/democraticNationalConventionLive', createCustomHTMLContentProg2(), new Date(0, 0, 0, 2, 30, 0), new Date(0, 0, 0, 3, 30, 0) ],
+      [ 'Alternate Content', '/disney.com/media/meetThePressLive', createCustomHTMLContentProg3(), new Date(0, 0, 0, 4, 30, 0), new Date(0, 0, 0, 5, 30, 0) ],
+      [ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 0, 30, 0) ],
+      [ 'Ad Breaks in Zone 1', null, 'Deleted', new Date(0, 0, 0, 0, 30, 0), new Date(0, 0, 0, 1, 0, 0) ],
+      [ 'Ad Breaks in Zone 1', null, 'Deleted', new Date(0, 0, 0, 1, 0, 0), new Date(0, 0, 0, 1, 30, 0) ],
+      [ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 1, 30, 0), new Date(0, 0, 0, 2, 0, 0) ],
+      [ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 2, 0, 0), new Date(0, 0, 0, 2, 30, 0) ],
+      [ 'Ad Breaks in Zone 1', null, 'Deleted', new Date(0, 0, 0, 2, 30, 0), new Date(0, 0, 0, 3, 0, 0) ],
+      [ 'Ad Breaks in Zone 1', null, 'Deleted', new Date(0, 0, 0, 3, 0, 0), new Date(0, 0, 0, 3, 30, 0) ],
+      [ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 3, 30, 0), new Date(0, 0, 0, 4, 0, 0) ],
+      [ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 4, 0, 0), new Date(0, 0, 0, 4, 30, 0) ],
+      [ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 4, 30, 0), new Date(0, 0, 0, 5, 0, 0) ],
+      [ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 5, 0, 0), new Date(0, 0, 0, 5, 30, 0) ],
+      [ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 5, 30, 0), new Date(0, 0, 0, 6, 0, 0) ],
+      [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 0, 30, 0) ],
+      [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(0, 0, 0, 0, 30, 0), new Date(0, 0, 0, 1, 0, 0) ],
+      [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(0, 0, 0, 1, 0, 0), new Date(0, 0, 0, 1, 30, 0) ],
+      [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(0, 0, 0, 1, 30, 0), new Date(0, 0, 0, 2, 0, 0) ],
+      [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(0, 0, 0, 2, 0, 0), new Date(0, 0, 0, 2, 30, 0) ],
+      [ 'Ad Breaks in Zone 2', null, 'Deleted', new Date(0, 0, 0, 2, 30, 0), new Date(0, 0, 0, 3, 0, 0) ],
+      [ 'Ad Breaks in Zone 2', null, 'Deleted', new Date(0, 0, 0, 3, 0, 0), new Date(0, 0, 0, 3, 30, 0) ],
+      [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(0, 0, 0, 3, 30, 0), new Date(0, 0, 0, 4, 0, 0) ],
+      [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(0, 0, 0, 4, 0, 0), new Date(0, 0, 0, 4, 30, 0) ],
+      [ 'Ad Breaks in Zone 2', null, 'Deleted', new Date(0, 0, 0, 4, 30, 0), new Date(0, 0, 0, 5, 0, 0) ],
+      [ 'Ad Breaks in Zone 2', null, 'Deleted', new Date(0, 0, 0, 5, 0, 0), new Date(0, 0, 0, 5, 30, 0) ],
+      [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(0, 0, 0, 5, 30, 0), new Date(0, 0, 0, 6, 0, 0) ],
+    ]);
+
+	// Set chart options
+    var options = {
+					  title:'Linear Feed "Disney" Timeline for 12/08/2020.',
+		    	      timeline: { colorByRowLabel: true },
+		    	      backgroundColor: '#ffd',
+		    	      // This line makes the entire category's tooltip active.
+		    	      focusTarget: 'category',
+		    	      // Use an HTML tooltip.
+    	    	      tooltip: { isHtml: true },
+	    	      };
+	
+    // Instantiate and draw our chart, passing in some options.
+	var container = document.getElementById('chart_div');
+    var chart = new google.visualization.Timeline(container);
+    chart.draw(dataTable, options);
+ 	// Add our selection handler.
+    google.visualization.events.addListener(chart, 'select', function() {
+    	selectHandler(chart, dataTable);
+    });
+  }
+  
+  function selectHandler(chart, dataTable) {
+	var onClickHTMLAltConId="<b>Altcon ID: </b>" + dataTable.getValue(chart.getSelection()[0].row, 1);
+	var onClickHTMLRestrictedDevices="<b>Restricted Devices: </b>";
+	var i;
+	for (i = 0; i < restrictedDevices.length; i++) {
+		onClickHTMLRestrictedDevices += "<img src='images/" + restrictedDevices[i] + ".png' width='50' height='50' title='" + restrictedDevices[i] + "'>";
+	}
+	var onClickHTMLRestrictedZips="<b>Restricted Zips: </b>";
+	for (i = 1; i < latlongMappings.length; i++) {
+		onClickHTMLRestrictedZips += latlongMappings[i][2];
+		if(i!=latlongMappings.length-1){
+			onClickHTMLRestrictedZips +=", ";
+		}
+	}
+	/* var onClickHTMLStreamConditioningData="<b><u>Stream Conditioning Details: </u></b><br/>";
+	onClickHTMLStreamConditioningData += "<table id='gable' border='1' width='100%'>";
+	onClickHTMLStreamConditioningData += "<tr><th>COUNTRY</th><th>LoC</th><th>BALANCE</th><th>DATE</th></tr>"; */
+	//onClickHTMLStreamConditioningData += "<tr><th>Stream Id</th><th>Event Started</th><th>Event Completed</th></tr>";
+	//onClickHTMLStreamConditioningData += "<tr><td></td><td></td><td></td></tr>";
+	//onClickHTMLStreamConditioningData += "</table>";
+	document.getElementById('altConId').innerHTML=onClickHTMLAltConId;
+	document.getElementById('restrictedDevices').innerHTML=onClickHTMLRestrictedDevices;
+	document.getElementById('restrictedZips').innerHTML=onClickHTMLRestrictedZips;
+	//document.getElementById('streamConditioningData').innerHTML=onClickHTMLStreamConditioningData;
+	
+    var divShowData = document.getElementById('streamConditioningData');
+    divShowData.innerHTML = "";
+    divShowData.appendChild(tableFromJson());
+
+    google.charts.load('current', {
+	    'packages': ['geochart'],
+	    'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+	 });
+	 google.charts.setOnLoadCallback(drawMarkersMap);
+  }
+  
+  function drawMarkersMap() {
+      var data = google.visualization.arrayToDataTable(latlongMappings);
+
+      var options = {
+        region: 'US',
+        displayMode: 'Markers',
+		resolution: 'metros',
+		enableRegionInteractivity: true,
+        colorAxis: {colors: ['green', 'blue']},
+        backgroundColor: '#81d4fa',
+        datalessRegionColor: '#ffffff',
+		tooltip: {textStyle: {color: '#FF0000'}, showColorCode: true}
+      };
+
+      var chart = new google.visualization.GeoChart(document.getElementById('restrictedZipsGeoChart'));
+      chart.draw(data, options);
+    };
+  
+  function createCustomHTMLContentProg1() {
+	  return '<div style="white-space: nowrap;">' +
+      			'<div><b>Effective Time:</b> 12/08/2020 00:30 PT</div>' + 
+      			'<div><b>Expire Time   :</b> 12/08/2020 01:30 PT</div>' + 
+      			'<div><b>Status        :</b> Completed</div>' + 
+	      	'</div>';
+  }
+  
+  function createCustomHTMLContentProg2() {
+	  return '<div style="white-space: nowrap;">' +
+      			'<div><b>Effective Time:</b> 12/08/2020 02:30 PT</div>' + 
+      			'<div><b>Expire Time   :</b> 12/08/2020 03:30 PT</div>' + 
+      			'<div><b>Status        :</b> Completed</div>' + 
+	      	'</div>';
+  }
+  
+  function createCustomHTMLContentProg3() {
+	  return '<div style="white-space: nowrap;">' +
+      			'<div><b>Effective Time:</b> 12/08/2020 04:30 PT</div>' + 
+      			'<div><b>Expire Time   :</b> 12/08/2020 05:30 PT</div>' + 
+      			'<div><b>Status        :</b> Completed</div>' + 
+	      	'</div>';
+  }
+  
+  // my testing
+ function tableFromJson() {
+	// the json data.
+   	var feedDetails = [
+           {'Acquistion Point ID': '1', 'Event ID': 'Presidential Debate Live', 'Event Start': '2020-12-08',
+               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-12:30:00'
+           },
+           
+           {'Acquistion Point ID': '2', 'Event ID': 'Democratic National Convention Live', 'Event Start': '2020-12-08',
+               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-14:30:00'
+           },
+           
+           {'Acquistion Point ID': '3', 'Event ID': 'Meet the Press Live', 'Event Start': '2020-12-08',
+               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-16:30:00'
+           },
+           {'Acquistion Point ID': '4', 'Event ID': 'Vice Presidential Debate Live', 'Event Start': '2020-12-08',
+               'Event End': '2020-12-08', 'Status': 'CANCELED', 'Signal Time': '2020-12-08-18:30:00'
+           }
+       ]
+
+      // Extract value from table header. 
+      // ('Acquistion Point ID', 'Event ID', 'Category' and 'Price')
+      var col = [];
+      for (var i = 0; i < feedDetails.length; i++) {
+          for (var key in feedDetails[i]) {
+              if (col.indexOf(key) === -1) {
+                  col.push(key);
+              }
+          }
+      }
+
+      // Create a table.
+      var table = document.createElement("table");
+      table.setAttribute("border", "2");
+
+      // Create table header row using the extracted headers above.
+      var tr = table.insertRow(-1);                   // table row.
+
+      for (var i = 0; i < col.length; i++) {
+          var th = document.createElement("th");      // table header.
+          th.innerHTML = col[i];
+          tr.appendChild(th);
+      }
+
+      // add json data to the table as rows.
+      for (var i = 0; i < feedDetails.length; i++) {
+
+          tr = table.insertRow(-1);
+
+          for (var j = 0; j < col.length; j++) {
+              var tabCell = tr.insertCell(-1);
+              tabCell.innerHTML = feedDetails[i][col[j]];
+          }
+      }
+	return table;     
+   }
+</script>
+</head>
+
+<body>
+	<!--Div that will hold the pie chart-->
+   	<div id="chart_div"></div>
+   	<table width="100%">
+   		<tr>
+   			<td width="30%" valign="top">
+			   	<table>
+				   	<tr>
+				   		<td align="left">
+				   			<div id="altConId"></div>
+				   		<td>
+				   	</tr>
+				   	<tr>
+				   		<td align="left">
+				   			<div id="restrictedDevices"></div>
+				   		<td>
+				   	</tr>
+				   	<tr>
+				   		<td align="left">
+				   			<div id="restrictedZips"></div>
+				   		</td>
+				   	</tr>
+				   	<tr>
+				   		<td align="left">
+				   			<div id="streamConditioningData"></div>
+				   		</td>
+				   	</tr>
+			   	</table>
+			</td>
+			<td width="70%">
+				<table width="95%">
+				   	<tr>
+				   		<td rowspan="4">
+				   			<div id="restrictedZipsGeoChart"></div>
+				   		</td>
+				   	</tr>
+			   	</table>
+			</td>
+		</tr>
+   	</table>
+	<script type="text/javascript" th:src="@{/js/jquery-3.1.0.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+
+</html>
