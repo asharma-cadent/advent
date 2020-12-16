@@ -1,7 +1,5 @@
 package tv.cadent.linear.controller;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -60,23 +58,17 @@ public class HomeController {
 		latlongMappings[7] = new Object[] { geoLatLongs.get("10005")[0], geoLatLongs.get("10005")[1], "10005" };
 		model.addAttribute("latlongMappings", latlongMappings);
 		model.addAttribute("restrictedDevices", new String[] { "pc", "tablet" });
-
-		JSONParser parser = new JSONParser();
+		getFeedData(model);
+		return "index";
+	}
+	
+	private void getFeedData(Model model) {
 		try {
 			Resource resource = resourceLoader.getResource("classpath:feeddata/feedData.json");
-
-			File jsonFeedFile = new File(resource.getURI());
-			Object obj = parser.parse(new FileReader(jsonFeedFile));
-
-			// A JSON object. Key value pairs are unordered. JSONObject supports
-			// java.util.Map interface.
-			JSONArray feedJsonArray = (JSONArray) obj;
-
-			model.addAttribute("feedJsonArray", feedJsonArray);
+			JSONArray feedDataArray = (JSONArray)new JSONParser().parse(Files.readString(Paths.get(resource.getURI())));
+			model.addAttribute("feedJsonArray", feedDataArray);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return "index";
 	}
 }
