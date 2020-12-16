@@ -2,7 +2,7 @@
 	{
 		"date": "12/16/2020",
 		"feedName": "NBC Universal",
-		"feedData": [
+		"feedData": 
 			{
 				"zonedBreakData": [
 					{
@@ -85,6 +85,6 @@
 					}
 				]
 			}
-		]
+		
 	}
 ]
