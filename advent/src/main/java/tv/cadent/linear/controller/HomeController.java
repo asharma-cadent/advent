@@ -87,6 +87,11 @@ public class HomeController {
     			};
         model.addAttribute("latlongMappings", latlongMappings);
         model.addAttribute("restrictedDevices", new String[] {"pc","tablet"});
+		model.addAttribute("feedData", new String[] { "pc", "tablet" });// Add
+																		// Maria's
+																		// Dummy
+																		// Json
+																		// here
         return "index";
     }
 }
