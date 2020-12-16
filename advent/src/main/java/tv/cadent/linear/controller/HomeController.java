@@ -66,7 +66,8 @@ public class HomeController {
 	private void getFeedData(Model model) {
 		try {
 			Resource resource = resourceLoader.getResource("classpath:feeddata/feedData.json");
-			JSONArray feedDataRowArray = (JSONArray)new JSONParser().parse(Files.readString(Paths.get(resource.getURI())));
+			JSONArray feedDataRowArray = (JSONArray)new JSONParser().parse(
+					new String(Files.readAllBytes(Paths.get(resource.getURI()))));
 			if(feedDataRowArray!=null) {
 				for(int i=0; i < feedDataRowArray.size(); i++) {
 					JSONObject feedDataRow = (JSONObject)feedDataRowArray.get(i);
