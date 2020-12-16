@@ -1,12 +1,13 @@
 <html xmlns="http://thymeleaf.org">
 
 <head>
-<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"	type="text/css"></link>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"
+	type="text/css"></link>
 <link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css"></link>
 <style>
 th, td {
-  padding: 15px;
-  white-space:nowrap;
+	padding: 15px;
+	white-space: nowrap;
 }
 </style>
 <title>Linear Feed Timeline</title>
@@ -47,7 +48,8 @@ th, td {
 </script>
 
 <!--Load the AJAX API-->
-<script type="text/javascript"	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script type="text/javascript">
 
@@ -67,35 +69,26 @@ th, td {
     dataTable.addColumn({ type: 'string', role: 'tooltip' });
     dataTable.addColumn({ type: 'date', id: 'Start' });
     dataTable.addColumn({ type: 'date', id: 'End' });
-    dataTable.addRows([
-      [ 'Alternate Content', '/disney.com/media/presidentialDebateLive', createCustomHTMLContentProg1(), new Date(0, 0, 0, 0, 30, 0), new Date(0, 0, 0, 1, 30, 0) ],
-      [ 'Alternate Content', '/disney.com/media/democraticNationalConventionLive', createCustomHTMLContentProg2(), new Date(0, 0, 0, 2, 30, 0), new Date(0, 0, 0, 3, 30, 0) ],
-      [ 'Alternate Content', '/disney.com/media/meetThePressLive', createCustomHTMLContentProg3(), new Date(0, 0, 0, 4, 30, 0), new Date(0, 0, 0, 5, 30, 0) ],
-      [ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 0, 30, 0) ],
-      [ 'Ad Breaks in Zone 1', null, 'Deleted', new Date(0, 0, 0, 0, 30, 0), new Date(0, 0, 0, 1, 0, 0) ],
-      [ 'Ad Breaks in Zone 1', null, 'Deleted', new Date(0, 0, 0, 1, 0, 0), new Date(0, 0, 0, 1, 30, 0) ],
-      [ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 1, 30, 0), new Date(0, 0, 0, 2, 0, 0) ],
-      [ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 2, 0, 0), new Date(0, 0, 0, 2, 30, 0) ],
-      [ 'Ad Breaks in Zone 1', null, 'Deleted', new Date(0, 0, 0, 2, 30, 0), new Date(0, 0, 0, 3, 0, 0) ],
-      [ 'Ad Breaks in Zone 1', null, 'Deleted', new Date(0, 0, 0, 3, 0, 0), new Date(0, 0, 0, 3, 30, 0) ],
-      [ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 3, 30, 0), new Date(0, 0, 0, 4, 0, 0) ],
-      [ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 4, 0, 0), new Date(0, 0, 0, 4, 30, 0) ],
-      [ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 4, 30, 0), new Date(0, 0, 0, 5, 0, 0) ],
-      [ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 5, 0, 0), new Date(0, 0, 0, 5, 30, 0) ],
-      [ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 5, 30, 0), new Date(0, 0, 0, 6, 0, 0) ],
-      [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 0, 30, 0) ],
-      [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(0, 0, 0, 0, 30, 0), new Date(0, 0, 0, 1, 0, 0) ],
-      [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(0, 0, 0, 1, 0, 0), new Date(0, 0, 0, 1, 30, 0) ],
-      [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(0, 0, 0, 1, 30, 0), new Date(0, 0, 0, 2, 0, 0) ],
-      [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(0, 0, 0, 2, 0, 0), new Date(0, 0, 0, 2, 30, 0) ],
-      [ 'Ad Breaks in Zone 2', null, 'Deleted', new Date(0, 0, 0, 2, 30, 0), new Date(0, 0, 0, 3, 0, 0) ],
-      [ 'Ad Breaks in Zone 2', null, 'Deleted', new Date(0, 0, 0, 3, 0, 0), new Date(0, 0, 0, 3, 30, 0) ],
-      [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(0, 0, 0, 3, 30, 0), new Date(0, 0, 0, 4, 0, 0) ],
-      [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(0, 0, 0, 4, 0, 0), new Date(0, 0, 0, 4, 30, 0) ],
-      [ 'Ad Breaks in Zone 2', null, 'Deleted', new Date(0, 0, 0, 4, 30, 0), new Date(0, 0, 0, 5, 0, 0) ],
-      [ 'Ad Breaks in Zone 2', null, 'Deleted', new Date(0, 0, 0, 5, 0, 0), new Date(0, 0, 0, 5, 30, 0) ],
-      [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(0, 0, 0, 5, 30, 0), new Date(0, 0, 0, 6, 0, 0) ],
-    ]);
+    var arr= [
+        [ 'Alternate Content', '/disney.com/media/presidentialDebateLive', createCustomHTMLContentProg1(), new Date(0, 0, 0, 0, 30, 0), new Date(0, 0, 0, 1, 30, 0) ],
+        [ 'Alternate Content', '/disney.com/media/democraticNationalConventionLive', createCustomHTMLContentProg2(), new Date(0, 0, 0, 2, 30, 0), new Date(0, 0, 0, 3, 30, 0) ],
+        [ 'Alternate Content', '/disney.com/media/meetThePressLive', createCustomHTMLContentProg3(), new Date(0, 0, 0, 4, 30, 0), new Date(0, 0, 0, 5, 30, 0) ],
+        //[ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 0, 30, 0) ],
+      ];
+    
+    //arr.push( [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(2020,12,16,00,00,00), new Date(2020,12,16,00,00,30) ]);
+        
+    var zoneBreakDataLocal = feedJsonArray[0].feedData.zonedBreakData;//[0].breakData
+    for (i = 0; i < zoneBreakDataLocal.length; i++) {
+    	var zoneLocal = zoneBreakDataLocal[i].zoneId;
+    	var zoneBreakDataItr = zoneBreakDataLocal[i].breakData;
+    	 for (j = 0; j < zoneBreakDataItr.length; j++) {    		 
+    		 var startHourMinutSecArr = zoneBreakDataItr[j].windowStartTime.split(" ")[1].split(":");
+    		 var endHourMinutSecArr = zoneBreakDataItr[j].windowEndTime.split(" ")[1].split(":");    			
+    			arr.push([ 'Zone('+zoneLocal+")" , zoneBreakDataItr[j].spotId, zoneBreakDataItr[j].breakStatus, new Date(0, 0, 0, startHourMinutSecArr[0], startHourMinutSecArr[1],startHourMinutSecArr[2]), new Date(0, 0, 0, endHourMinutSecArr[0], endHourMinutSecArr[1],endHourMinutSecArr[2]) ]);
+    	 }
+	} 
+    dataTable.addRows(arr);
 
 	// Set chart options
     var options = {
@@ -172,6 +165,13 @@ th, td {
       chart.draw(data, options);
     };
   
+    function createCustomHTMLContentProg1WithArg(startTime, stopTime, status) {
+    	  return '<div style="white-space: nowrap;">' +
+          			'<div><b>Effective Time:</b> '+startTime+'</div>' + 
+          			'<div><b>Expire Time   :</b> '+stopTime+'</div>' + 
+          			'<div><b>Status        :</b> '+status+'</div>' + 
+    	      	'</div>';
+      }
   function createCustomHTMLContentProg1() {
 	  return '<div style="white-space: nowrap;">' +
       			'<div><b>Effective Time:</b> 12/08/2020 00:30 PT</div>' + 
@@ -260,57 +260,56 @@ th, td {
 	<div id="filters">
 		<table width="50%">
 			<tr>
-				<th>
-					Feed:
-						<select name="feed_id" id="feed_id" onchange="processFeedSelection()">
-							<option value="-select-">-Select-</option>
-						</select>
+				<th>Feed: <select name="feed_id" id="feed_id"
+					onchange="processFeedSelection()">
+						<option value="-select-">-Select-</option>
+				</select>
 				</th>
-				<th style="align-content:left">
-					Date:
-						<input type="date" id="bulletin_date" name="bulletin_date" onchange="processDateSelection()"/>
+				<th style="align-content: left">Date: <input type="date"
+					id="bulletin_date" name="bulletin_date"
+					onchange="processDateSelection()" />
 				</th>
 			</tr>
 		</table>
 	</div>
-   	<div id="chart_div"></div>
-   	<table width="100%">
-   		<tr>
-   			<td width="30%" valign="top">
-			   	<table>
-				   	<tr>
-				   		<td align="left">
-				   			<div id="altConId"></div>
-				   		<td>
-				   	</tr>
-				   	<tr>
-				   		<td align="left">
-				   			<div id="restrictedDevices"></div>
-				   		<td>
-				   	</tr>
-				   	<tr>
-				   		<td align="left">
-				   			<div id="restrictedZips"></div>
-				   		</td>
-				   	</tr>
-				   	<tr>
-				   		<td align="left">
-				   			<div id="streamConditioningData"></div>
-				   		</td>
-				   	</tr>
-			   	</table>
+	<div id="chart_div"></div>
+	<table width="100%">
+		<tr>
+			<td width="30%" valign="top">
+				<table>
+					<tr>
+						<td align="left">
+							<div id="altConId"></div>
+						<td>
+					</tr>
+					<tr>
+						<td align="left">
+							<div id="restrictedDevices"></div>
+						<td>
+					</tr>
+					<tr>
+						<td align="left">
+							<div id="restrictedZips"></div>
+						</td>
+					</tr>
+					<tr>
+						<td align="left">
+							<div id="streamConditioningData"></div>
+						</td>
+					</tr>
+				</table>
 			</td>
 			<td width="70%">
 				<table width="95%">
-				   	<tr>
-				   		<td rowspan="4">
-				   			<div id="restrictedZipsGeoChart"></div>
-				   		</td>
-				   	</tr>
-			   	</table>
+					<tr>
+						<td rowspan="4">
+							<div id="restrictedZipsGeoChart"></div>
+						</td>
+					</tr>
+				</table>
 			</td>
 		</tr>
-   	</table>
+	</table>
 	<script type="text/javascript" th:src="@{/js/jquery-3.1.0.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 </body>
