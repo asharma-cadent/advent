@@ -48,7 +48,7 @@ th, td {
         	}
         }
     	//Call the methods that draw the charts with the feed data.
-    	alert("Feed Name: " + feedDataRow.feedName + ", Date:" + feedDataRow.date);
+    	drawChart(feedDataRow);
     }
     
     function loadFeedAndDateFields(){
@@ -105,7 +105,7 @@ th, td {
   
   // Callback that creates and populates a data table, instantiates the timeline chart, passes in the data and
   // draws it.
-  function drawChart() {
+  function drawChart(feedDataRow) {
 
     var dataTable = new google.visualization.DataTable();
     dataTable.addColumn({ type: 'string', id: 'Position' });
@@ -122,7 +122,7 @@ th, td {
     
     //arr.push( [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(2020,12,16,00,00,00), new Date(2020,12,16,00,00,30) ]);
         
-    var zoneBreakDataLocal = feedJsonArray[0].feedData.zonedBreakData;//[0].breakData
+    var zoneBreakDataLocal = feedDataRow.feedData.zonedBreakData;//[0].breakData
     for (i = 0; i < zoneBreakDataLocal.length; i++) {
     	var zoneLocal = zoneBreakDataLocal[i].zoneId;
     	var zoneBreakDataItr = zoneBreakDataLocal[i].breakData;
