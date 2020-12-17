@@ -58,7 +58,7 @@ body {
         	}
         }
     	//Call the methods that draw the charts with the feed data.
-    	drawChart(feedDataRow);
+    	drawTimeLineChart(feedDataRow);
     }
     
     function loadFeedAndDateFields(){
@@ -107,16 +107,69 @@ body {
 
 <script type="text/javascript">
 
-  //Load the Visualization API and the timeline package.
-  google.charts.load("current", {packages:["timeline"]});
-  
-  //Set a callback to run when the Google Visualization API is loaded.
-  google.charts.setOnLoadCallback(drawChart);
-  
+	google.load('visualization', '1', {packages: ['controls', 'charteditor']});
+
+	function drawTimeLineChart(feedDataRow){
+		if(!feedDataRow){
+			  return;
+		}
+		var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
+		var control = new google.visualization.ControlWrapper(
+				{
+					'controlType': 'ChartRangeFilter',
+					'containerId': 'control_div',
+					'options': {
+		   							'backgroundColor': '#ffd',
+		   							'filterColumnIndex': 5,
+		   							'ui': {
+			          						'chartType': 'LineChart',
+			        						'chartOptions': {
+			                                	'height': 60,
+		   									 },
+		       								'chartView':{
+		           								'columns': [5,6]
+		       								},
+		       								'chartArea': {
+		       			                        'width': '80%'
+		       			                    }
+									}
+					}
+				});
+		
+		var chartWrapper = new google.visualization.ChartWrapper(
+ 				{
+					'chartType': 'Timeline',
+       				'containerId': 'chart_div',
+       				'options': {
+       								'backgroundColor': '#ffd',
+                					'colorByRowLabel': true,
+                 					// This line makes the entire category's tooltip active.
+ 		    						'focusTarget': 'category',
+ 		    	    				// Use an HTML tooltip.
+     	    	    				'tooltip': { isHtml: true },
+     	    	    				'axisTitlesPosition': 'out',
+     	    	    				'chartArea': {
+     	    	                        'width': '80%'
+     	    	                    }
+								},
+       				'view': {
+       					'columns': [0, 1, 2, 3, 4, 5, 6, 7]
+   					}
+				});
+	    dashboard.bind(control, chartWrapper);
+	    var dataTable = getDataTable(feedDataRow);
+	    dashboard.draw(dataTable);
+	 	// Add our selection handler.
+	 	google.visualization.events.addListener(chartWrapper , 'ready', function(){
+		    google.visualization.events.addListener(chartWrapper ,'select', function() {
+				selectHandler(chartWrapper.getChart(), dataTable);
+			});
+		});
+	}
+
   // Callback that creates and populates a data table, instantiates the timeline chart, passes in the data and
   // draws it.
-  function drawChart(feedDataRow) {
-
+  function getDataTable(feedDataRow) {
     var dataTable = new google.visualization.DataTable();
     dataTable.addColumn({ type: 'string', id: 'Position' });
     dataTable.addColumn({ type: 'string', id: 'Name' });
@@ -147,25 +200,7 @@ body {
 	} 
     dataTable.addRows(arr);
 
-	// Set chart options
-    var options = {
- 				  title:'Linear Feed "Disney" Timeline for 12/08/2020.',
-		    	      timeline: { colorByRowLabel: true },
-		    	      backgroundColor: '#ffd',
-		    	      // This line makes the entire category's tooltip active.
-		    	      focusTarget: 'category',
-		    	      // Use an HTML tooltip.
-   	    	      	  tooltip: { isHtml: true },
-  	    	      };
-	
-    // Instantiate and draw our chart, passing in some options.
-	var container = document.getElementById('chart_div');
-    var chart = new google.visualization.Timeline(container);
-    chart.draw(dataTable, options);
- 	// Add our selection handler.
-    google.visualization.events.addListener(chart, 'select', function() {
-    	selectHandler(chart, dataTable);
-    });
+	return dataTable;
   }
   
   function selectHandler(chart, dataTable) {
@@ -370,8 +405,10 @@ body {
 			</tr>
 		</table>
 	</div>
-	<div id="chart_div"></div> 
-	
+		<div id="dashboard_div">
+    	<div id="chart_div"></div>
+        <div id="control_div"></div>
+    </div> 
 
 	<table width="100%">
 		<tr>
