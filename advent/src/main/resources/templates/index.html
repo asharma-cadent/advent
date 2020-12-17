@@ -22,7 +22,9 @@ body {
 </style>
 <title>Linear Feed Timeline</title>
 <script type="text/javascript" th:inline="javascript">
-	var feedJsonArray = [[${feedJsonArray}]];
+        /*<![CDATA[*/
+	        var feedJsonArray = /*[[${feedJsonArray}]]*/;
+        /*]]>*/
         
     //Populate the drop down with all the feed names
 	function processFeedSelection() {
