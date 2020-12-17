@@ -187,6 +187,11 @@ body {
                'Window End': windowEndTime, 'Status': status
            }           
        ]
+		
+   		document.getElementById('altConId').innerHTML="";
+		document.getElementById('restrictedDevices').innerHTML="";
+		document.getElementById('restrictedZips').innerHTML="";
+		
 		divShowData.appendChild(tableFromJson(feedDetails));
    		var chart = document.getElementById('restrictedZipsGeoChart');
    		chart.style.display = "none";
