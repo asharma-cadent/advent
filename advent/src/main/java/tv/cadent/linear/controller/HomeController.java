@@ -29,7 +29,7 @@ public class HomeController {
 
 	@PostConstruct
 	public void loadLatLongs() {
-		Resource resource = resourceLoader.getResource("classpath:geodata/geodata.csv");
+		Resource resource = resourceLoader.getResource("geodata/geodata.csv");
 		// read file into stream, try-with-resources
 		try (Stream<String> stream = Files.lines(Paths.get(resource.getURI()))) {
 			stream.forEach(line -> {
@@ -48,17 +48,6 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String viewHome(Model model) {
-		Object[][] latlongMappings = new Object[8][];
-		latlongMappings[0] = new Object[] { "Latitude", "Longitude", "Zip Code", };
-		latlongMappings[1] = new Object[] { geoLatLongs.get("95014")[0], geoLatLongs.get("95014")[1], "95014" };
-		latlongMappings[2] = new Object[] { geoLatLongs.get("95017")[0], geoLatLongs.get("95017")[1], "95017" };
-		latlongMappings[3] = new Object[] { geoLatLongs.get("95018")[0], geoLatLongs.get("95018")[1], "95018" };
-		latlongMappings[4] = new Object[] { geoLatLongs.get("95019")[0], geoLatLongs.get("95019")[1], "95019" };
-		latlongMappings[5] = new Object[] { geoLatLongs.get("95020")[0], geoLatLongs.get("95020")[1], "95020" };
-		latlongMappings[6] = new Object[] { geoLatLongs.get("10001")[0], geoLatLongs.get("10001")[1], "10001" };
-		latlongMappings[7] = new Object[] { geoLatLongs.get("10005")[0], geoLatLongs.get("10005")[1], "10005" };
-		model.addAttribute("latlongMappings", latlongMappings);
-		model.addAttribute("restrictedDevices", new String[] { "pc", "tablet" });
 		getFeedData(model);
 		return "index";
 	}
