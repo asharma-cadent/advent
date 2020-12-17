@@ -137,8 +137,7 @@ body {
 					'chartType': 'Timeline',
        				'containerId': 'chart_div',
        				'options': {
-       								'backgroundColor': '#ffd',
-                					'colorByRowLabel': true,
+       								'backgroundColor': '#ffd',                					
                  					// This line makes the entire category's tooltip active.
  		    						'focusTarget': 'category',
  		    	    				// Use an HTML tooltip.
@@ -147,9 +146,11 @@ body {
      	    	    				'chartArea': {
      	    	                        'width': '80%'
      	    	                    }
+									/* ,
+									 timeline: { singleColor: '#6190d0' } */
 								},
        				'view': {
-       					'columns': [0, 1, 2, 3, 4, 5, 6, 7]
+       					'columns': [0, 1, 2, 3, 4, 5, 6, 7, 12]
    					}
 				});
 	    dashboard.bind(control, chartWrapper);
@@ -179,6 +180,7 @@ body {
     dataTable.addColumn({ type: 'string', id: 'restrictedDevices' });
     dataTable.addColumn({ type: 'string', id: 'executionType' });
     dataTable.addColumn({ type: 'string', id: 'altConId' });
+	dataTable.addColumn({ type: 'string', id: 'style', role: 'style' });
     
     var arr = [];
     
@@ -218,7 +220,7 @@ body {
 		      		new Date(0, 0, 0, eventStartSignalTimeArr[0], eventStartSignalTimeArr[1], eventStartSignalTimeArr[2]),
 		      		new Date(0, 0, 0, eventEndSignalTimeArr[0], eventEndSignalTimeArr[1], eventEndSignalTimeArr[2]),
 		      		status, restrictedZipcodes, restrictedDevices, executionType,
-		      		'https://www.'+feedDataRow.feedName.toLowerCase()+'.com/media/'+programName]);
+		      		'https://www.'+feedDataRow.feedName.toLowerCase()+'.com/media/'+programName, getColor(status)]);
 	       	}
       } 
         
@@ -234,7 +236,7 @@ body {
  		 		zoneBreakDataItr[j].windowStartTime, zoneBreakDataItr[j].windowEndTime,
  		 		new Date(0, 0, 0, startHourMinutSecArr[0], startHourMinutSecArr[1],startHourMinutSecArr[2]),
  		 		new Date(0, 0, 0, endHourMinutSecArr[0], endHourMinutSecArr[1],endHourMinutSecArr[2]),
- 		 		zoneBreakDataItr[j].breakStatus, null, null, null, zoneBreakDataItr[j].spotId]);
+ 		 		zoneBreakDataItr[j].breakStatus, null, null, null, zoneBreakDataItr[j].spotId, getColor(zoneBreakDataItr[j].breakStatus)]);
 	   	}
    	  }
       dataTable.addRows(arr);
@@ -243,6 +245,33 @@ body {
 	return dataTable;
   }
   
+
+  function getColor(status) {
+	  var green='#008000';
+	  var orange='#FFA500';
+	  var red='#ff5349';
+	  var grey='#808080';
+	  var blue='#6699cc';
+	  var result=green;
+	  if(status.toUpperCase()==='CONFIRMED'.toUpperCase()){
+		  result = green;
+	  }
+	  if(status.toUpperCase()==='PENDING'.toUpperCase()){
+		  result = blue;
+	  }
+	  if(status.toUpperCase()==='CANCELLED'.toUpperCase()){
+		  result = orange;
+	  }
+	  if(status.toUpperCase()==='ERROR'.toUpperCase()){
+		  result = red;
+	  }
+	  if(status.toUpperCase()==='COMPLETE'.toUpperCase()){
+		  result = green;
+	  }
+	 
+	  
+	  return result;
+	}
   function selectHandler(chart, dataTable) {
 	var ccmsAdZone=	dataTable.getValue(chart.getSelection()[0].row, 0);
 	if(ccmsAdZone.indexOf("CCMS")!=-1){
