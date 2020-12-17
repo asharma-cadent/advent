@@ -111,25 +111,28 @@ th, td {
     dataTable.addColumn({ type: 'string', id: 'Position' });
     dataTable.addColumn({ type: 'string', id: 'Name' });
     dataTable.addColumn({ type: 'string', role: 'tooltip' });
+    dataTable.addColumn({ type: 'string', role: 'windowStartTime' });
+    dataTable.addColumn({ type: 'string', role: 'windowEndTime' });    
     dataTable.addColumn({ type: 'date', id: 'Start' });
     dataTable.addColumn({ type: 'date', id: 'End' });
+    dataTable.addColumn({ type: 'string', role: 'status' });
     var arr= [
-        [ 'Alternate Content', '/disney.com/media/presidentialDebateLive', createCustomHTMLContentProg1(), new Date(0, 0, 0, 0, 30, 0), new Date(0, 0, 0, 1, 30, 0) ],
-        [ 'Alternate Content', '/disney.com/media/democraticNationalConventionLive', createCustomHTMLContentProg2(), new Date(0, 0, 0, 2, 30, 0), new Date(0, 0, 0, 3, 30, 0) ],
-        [ 'Alternate Content', '/disney.com/media/meetThePressLive', createCustomHTMLContentProg3(), new Date(0, 0, 0, 4, 30, 0), new Date(0, 0, 0, 5, 30, 0) ],
+        [ 'Alternate Content', '/disney.com/media/presidentialDebateLive', createCustomHTMLContentProg1(), null, null, new Date(0, 0, 0, 0, 30, 0), new Date(0, 0, 0, 1, 30, 0) , 'CONFIRMED'],
+        [ 'Alternate Content', '/disney.com/media/democraticNationalConventionLive', createCustomHTMLContentProg2(),null, null, new Date(0, 0, 0, 2, 30, 0), new Date(0, 0, 0, 3, 30, 0), 'COMPLETE' ],
+        [ 'Alternate Content', '/disney.com/media/meetThePressLive', createCustomHTMLContentProg3(), null, null, new Date(0, 0, 0, 4, 30, 0), new Date(0, 0, 0, 5, 30, 0), 'CONFIRMED' ]
         //[ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 0, 30, 0) ],
       ];
     
     //arr.push( [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(2020,12,16,00,00,00), new Date(2020,12,16,00,00,30) ]);
         
-    var zoneBreakDataLocal = feedDataRow.feedData.zonedBreakData;//[0].breakData
+    var zoneBreakDataLocal = feedDataRow.feedData.zonedBreakData;
     for (i = 0; i < zoneBreakDataLocal.length; i++) {
     	var zoneLocal = zoneBreakDataLocal[i].zoneId;
     	var zoneBreakDataItr = zoneBreakDataLocal[i].breakData;
     	 for (j = 0; j < zoneBreakDataItr.length; j++) {    		 
     		 var startHourMinutSecArr = zoneBreakDataItr[j].windowStartTime.split(" ")[1].split(":");
     		 var endHourMinutSecArr = zoneBreakDataItr[j].windowEndTime.split(" ")[1].split(":");    			
-    			arr.push([ 'CCMS AdZone('+zoneLocal+")" , zoneBreakDataItr[j].spotId, zoneBreakDataItr[j].breakStatus, new Date(0, 0, 0, startHourMinutSecArr[0], startHourMinutSecArr[1],startHourMinutSecArr[2]), new Date(0, 0, 0, endHourMinutSecArr[0], endHourMinutSecArr[1],endHourMinutSecArr[2]) ]);
+    			arr.push([ 'CCMS AdZone('+zoneLocal+")" , zoneBreakDataItr[j].spotId, createCustomHTMLContentProg1WithArg(zoneBreakDataItr[j].windowStartTime, zoneBreakDataItr[j].windowEndTime,zoneBreakDataItr[j].breakStatus), zoneBreakDataItr[j].windowStartTime, zoneBreakDataItr[j].windowEndTime, new Date(0, 0, 0, startHourMinutSecArr[0], startHourMinutSecArr[1],startHourMinutSecArr[2]), new Date(0, 0, 0, endHourMinutSecArr[0], endHourMinutSecArr[1],endHourMinutSecArr[2]), zoneBreakDataItr[j].breakStatus ]);
     	 }
 	} 
     dataTable.addRows(arr);
@@ -164,25 +167,15 @@ th, td {
 		var status =	dataTable.getValue(chart.getSelection()[0].row, 2);
 		var windowStartTime=	dataTable.getValue(chart.getSelection()[0].row, 3);;
 		var windowEndTime=	dataTable.getValue(chart.getSelection()[0].row, 4);
+		var status=	dataTable.getValue(chart.getSelection()[0].row, 7);
 		
 		var divShowData = document.getElementById('streamConditioningData');
 		divShowData.innerHTML = "";
 		// the json data.
    		var feedDetails = [
-           {'Hello Yaminee': '1', 'Event ID': 'Presidential Debate Live', 'Event Start': '2020-12-08',
-               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-12:30:00'
-           },
-           
-           {'Acquistion Point ID': '2', 'Event ID': 'Democratic National Convention Live', 'Event Start': '2020-12-08',
-               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-14:30:00'
-           },
-           
-           {'Acquistion Point ID': '3', 'Event ID': 'Meet the Press Live', 'Event Start': '2020-12-08',
-               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-16:30:00'
-           },
-           {'Acquistion Point ID': '4', 'Event ID': 'Vice Presidential Debate Live', 'Event Start': '2020-12-08',
-               'Event End': '2020-12-08', 'Status': 'CANCELED', 'Signal Time': '2020-12-08-18:30:00'
-           }
+           {'Schedule Type': 'CCMS', 'Spot ID': spotId, 'Window Start': windowStartTime,
+               'Window End': windowEndTime, 'Status': status
+           }           
        ]
 		divShowData.appendChild(tableFromJson(feedDetails));
 	}else{//Blackout
@@ -331,11 +324,14 @@ th, td {
 
 <body onload="loadFeedAndDateFields()">
 	<!--  Logo and Title -->
-	<div id="header" style="background-color:black;color:white;padding:10px;">
-	<img src="images/CadentLogo1.svg" /> 
+	<div id="header"
+		style="background-color: black; color: white; padding: 10px;">
+		<img src="images/CadentLogo1.svg" />
 	</div>
-	
-	<div id="title" style="background-color:paleturquoise;color:blue;font-weight:bold;;font-size:24px;padding:10px;">Alternate Contents & Ad Breaks</div>
+
+	<div id="title"
+		style="background-color: paleturquoise; color: blue; font-weight: bold;; font-size: 24px; padding: 10px;">Alternate
+		Contents & Ad Breaks</div>
 
 
 	<!--Div that will hold the pie chart-->
