@@ -12,9 +12,8 @@ import javax.annotation.PostConstruct;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,16 +21,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-	@Autowired
-	ResourceLoader resourceLoader;
+	@Value("classpath:geodata/geodata.csv")
+	Resource geoDataFile;
+	
+	@Value("classpath:feeddata/feedData.json")
+	Resource feedDataFile;
 
 	private static Map<String, Float[]> geoLatLongs = new HashMap<String, Float[]>();
 
 	@PostConstruct
 	public void loadLatLongs() {
-		Resource resource = resourceLoader.getResource("geodata/geodata.csv");
 		// read file into stream, try-with-resources
-		try (Stream<String> stream = Files.lines(Paths.get(resource.getURI()))) {
+		try (Stream<String> stream = Files.lines(Paths.get(geoDataFile.getURI()))) {
 			stream.forEach(line -> {
 				String[] zeoLatLong = line.split(",");
 				try {
@@ -54,9 +55,8 @@ public class HomeController {
 	
 	private void getFeedData(Model model) {
 		try {
-			Resource resource = resourceLoader.getResource("classpath:feeddata/feedData.json");
 			JSONArray feedDataRowArray = (JSONArray)new JSONParser().parse(
-					new String(Files.readAllBytes(Paths.get(resource.getURI()))));
+					new String(Files.readAllBytes(Paths.get(feedDataFile.getURI()))));
 			if(feedDataRowArray!=null) {
 				for(int i=0; i < feedDataRowArray.size(); i++) {
 					JSONObject feedDataRow = (JSONObject)feedDataRowArray.get(i);
