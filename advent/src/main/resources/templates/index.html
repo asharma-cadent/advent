@@ -25,7 +25,7 @@ body {
         /*<![CDATA[*/
 	        //the list converts as a javascript object
 	        var latlongMappings = /*[[${latlongMappings}]]*/;
-	        var restrictedDevices = /*[[${restrictedDevices}]]*/;
+	        //var restrictedDevices = /*[[${restrictedDevices}]]*/;
 	        var feedJsonArray = [[${feedJsonArray}]];
 	       // alert(feedJsonArray[0].date + " "+ feedJsonArray[0].feedData);
         /*]]>*/
@@ -179,33 +179,71 @@ body {
     dataTable.addColumn({ type: 'date', id: 'Start' });
     dataTable.addColumn({ type: 'date', id: 'End' });
     dataTable.addColumn({ type: 'string', role: 'status' });
-    var arr= [
-        [ 'Alternate Content', '/disney.com/media/presidentialDebateLive', createCustomHTMLContentProg1(), null, null, new Date(0, 0, 0, 0, 30, 0), new Date(0, 0, 0, 1, 30, 0) , 'CONFIRMED'],
-        [ 'Alternate Content', '/disney.com/media/democraticNationalConventionLive', createCustomHTMLContentProg2(),null, null, new Date(0, 0, 0, 2, 30, 0), new Date(0, 0, 0, 3, 30, 0), 'COMPLETE' ],
-        [ 'Alternate Content', '/disney.com/media/meetThePressLive', createCustomHTMLContentProg3(), null, null, new Date(0, 0, 0, 4, 30, 0), new Date(0, 0, 0, 5, 30, 0), 'CONFIRMED' ]
-        //[ 'Ad Breaks in Zone 1', null, 'Confirmed', new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 0, 30, 0) ],
-      ];
+    dataTable.addColumn({ type: 'string', id: 'restrictedZips' });
+    dataTable.addColumn({ type: 'string', id: 'restrictedDevices' });
+    
+    var arr = [];
+    
+    if(feedDataRow != null){
+  	   var altConDataLocal = feedDataRow.feedData.altConData;
+       for(i = 0; i < altConDataLocal.length; i++){
+    	// get restricted zipcode information.
+    	var restrictedZipcodes = "";
+       	var restrictedZipcodeObjects = altConDataLocal[i].restrictedZips;
+       	for(j=0; j< restrictedZipcodeObjects.length; j++){
+       		restrictedZipcodes += restrictedZipcodeObjects[j].zipCode;
+       		if(j!= restrictedZipcodeObjects.length-1){
+       			restrictedZipcodes += ", ";
+       		}
+       	}
+       	
+       	//get restricted devices information
+       	var restrictedDevices = "";
+       	var restrictedDeviceObjects = altConDataLocal[i].restrictedDevices;
+       	for(j=0; j< restrictedDeviceObjects.length; j++){
+       		restrictedDevices += restrictedDeviceObjects[j];
+       		if(j!= restrictedDeviceObjects.length-1){
+       			restrictedDevices += ",";
+       		}
+       	}
+       	
+       	var programName = altConDataLocal[i].programName;
+       	var streamConditioningStatusDetails = altConDataLocal[i].streamConditioningStatus[0];
+    	var eventStartSignalTimeArr = streamConditioningStatusDetails.eventStartSignalTime.split(" ")[1].split(":");;
+      	var eventEndSignalTimeArr = streamConditioningStatusDetails.eventEndSignalTime.split(" ")[1].split(":");;
+      	var status = streamConditioningStatusDetails.status;
+      	var executionType = streamConditioningStatusDetails.executionType;
+      	arr.push(['Alternate Content', '/'+feedDataRow.feedName.toLowerCase()+'.com/media/'+programName, 
+      		createCustomHTMLContentProg(streamConditioningStatusDetails.eventStartSignalTime, streamConditioningStatusDetails.eventEndSignalTime, status),
+      		streamConditioningStatusDetails.eventStartSignalTime, streamConditioningStatusDetails.eventEndSignalTime, 
+      		new Date(0, 0, 0, eventStartSignalTimeArr[0], eventStartSignalTimeArr[1], eventStartSignalTimeArr[2]),
+      		new Date(0, 0, 0, eventEndSignalTimeArr[0], eventEndSignalTimeArr[1], eventEndSignalTimeArr[2]), status, restrictedZipcodes, restrictedDevices]);
+      } 
+        
+      var zoneBreakDataLocal = feedDataRow.feedData.zonedBreakData;
+      for (i = 0; i < zoneBreakDataLocal.length; i++) {
+      	var zoneLocal = zoneBreakDataLocal[i].zoneId;
+      	var zoneBreakDataItr = zoneBreakDataLocal[i].breakData;
+	  	for (j = 0; j < zoneBreakDataItr.length; j++) {    		 
+   			var startHourMinutSecArr = zoneBreakDataItr[j].windowStartTime.split(" ")[1].split(":");
+   			var endHourMinutSecArr = zoneBreakDataItr[j].windowEndTime.split(" ")[1].split(":");    			
+ 		 	arr.push([ 'CCMS AdZone('+zoneLocal+")" , zoneBreakDataItr[j].spotId, 
+ 		 		createCustomHTMLContentProg1WithArg(zoneBreakDataItr[j].windowStartTime, zoneBreakDataItr[j].windowEndTime,zoneBreakDataItr[j].breakStatus),
+ 		 		zoneBreakDataItr[j].windowStartTime, zoneBreakDataItr[j].windowEndTime,
+ 		 		new Date(0, 0, 0, startHourMinutSecArr[0], startHourMinutSecArr[1],startHourMinutSecArr[2]),
+ 		 		new Date(0, 0, 0, endHourMinutSecArr[0], endHourMinutSecArr[1],endHourMinutSecArr[2]), zoneBreakDataItr[j].breakStatus, null, null]);
+	   	}
+   	  }
+      dataTable.addRows(arr);
+    }
     
     //arr.push( [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(2020,12,16,00,00,00), new Date(2020,12,16,00,00,30) ]);
         
-    var zoneBreakDataLocal = feedDataRow.feedData.zonedBreakData;
-    for (i = 0; i < zoneBreakDataLocal.length; i++) {
-    	var zoneLocal = zoneBreakDataLocal[i].zoneId;
-    	var zoneBreakDataItr = zoneBreakDataLocal[i].breakData;
-    	 for (j = 0; j < zoneBreakDataItr.length; j++) {    		 
-    		 var startHourMinutSecArr = zoneBreakDataItr[j].windowStartTime.split(" ")[1].split(":");
-    		 var endHourMinutSecArr = zoneBreakDataItr[j].windowEndTime.split(" ")[1].split(":");    			
-    			arr.push([ 'CCMS AdZone('+zoneLocal+")" , zoneBreakDataItr[j].spotId, createCustomHTMLContentProg1WithArg(zoneBreakDataItr[j].windowStartTime, zoneBreakDataItr[j].windowEndTime,zoneBreakDataItr[j].breakStatus), zoneBreakDataItr[j].windowStartTime, zoneBreakDataItr[j].windowEndTime, new Date(0, 0, 0, startHourMinutSecArr[0], startHourMinutSecArr[1],startHourMinutSecArr[2]), new Date(0, 0, 0, endHourMinutSecArr[0], endHourMinutSecArr[1],endHourMinutSecArr[2]), zoneBreakDataItr[j].breakStatus ]);
-    	 }
-	} 
-    dataTable.addRows(arr);
 
 	return dataTable;
   }
   
   function selectHandler(chart, dataTable) {
-	var onClickHTMLAltConId="<b>Altcon ID: </b>" + dataTable.getValue(chart.getSelection()[0].row, 1);
-	
 	var ccmsAdZone=	dataTable.getValue(chart.getSelection()[0].row, 0);
 	if(ccmsAdZone.indexOf("CCMS")!=-1){
 		var spotId = dataTable.getValue(chart.getSelection()[0].row, 1);
@@ -231,48 +269,34 @@ body {
    		var chart = document.getElementById('restrictedZipsGeoChart');
    		chart.style.display = "none";
 
-	}else{//Blackout
+	}else{
+		//Blackout
+		var eventStartSignalTime = dataTable.getValue(chart.getSelection()[0].row, 3);
+		var eventEndSignalTime = dataTable.getValue(chart.getSelection()[0].row, 4);
+		var status = dataTable.getValue(chart.getSelection()[0].row, 7);
+		var restrictedZipcodes = dataTable.getValue(chart.getSelection()[0].row, 8);
+		var restrictedDevicesData = dataTable.getValue(chart.getSelection()[0].row, 9).split(",");
+		
+		// Get restricted devices for selected altConData
 		var onClickHTMLRestrictedDevices="<b>Restricted Devices: </b>";
 		var i;
-		for (i = 0; i < restrictedDevices.length; i++) {
-			onClickHTMLRestrictedDevices += "<img src='images/" + restrictedDevices[i] + ".png' width='50' height='50' title='" + restrictedDevices[i] + "'>";
+		for (i = 0; i < restrictedDevicesData.length; i++) {
+			onClickHTMLRestrictedDevices += "<img src='images/" + restrictedDevicesData[i].toLowerCase() + ".png' width='50' height='50' title='" + restrictedDevicesData[i] + "'>";
 		}
-		var onClickHTMLRestrictedZips="<b>Restricted Zips: </b>";
-		for (i = 1; i < latlongMappings.length; i++) {
-			onClickHTMLRestrictedZips += latlongMappings[i][2];
-			if(i!=latlongMappings.length-1){
-				onClickHTMLRestrictedZips +=", ";
-			}
-		}
-		/* var onClickHTMLStreamConditioningData="<b><u>Stream Conditioning Details: </u></b><br/>";
-		onClickHTMLStreamConditioningData += "<table id='gable' border='1' width='100%'>";
-		onClickHTMLStreamConditioningData += "<tr><th>COUNTRY</th><th>LoC</th><th>BALANCE</th><th>DATE</th></tr>"; */
-		//onClickHTMLStreamConditioningData += "<tr><th>Stream Id</th><th>Event Started</th><th>Event Completed</th></tr>";
-		//onClickHTMLStreamConditioningData += "<tr><td></td><td></td><td></td></tr>";
-		//onClickHTMLStreamConditioningData += "</table>";
+		
+		// Get restricted zipcodes for selected altConData
+		var onClickHTMLRestrictedZips="<b>Restricted Zips: </b>" + restrictedZipcodes;
+		
+		var onClickHTMLAltConId="<b>Altcon ID: </b>" + dataTable.getValue(chart.getSelection()[0].row, 1);
 		document.getElementById('altConId').innerHTML=onClickHTMLAltConId;
 		document.getElementById('restrictedDevices').innerHTML=onClickHTMLRestrictedDevices;
 		document.getElementById('restrictedZips').innerHTML=onClickHTMLRestrictedZips;
 		//document.getElementById('streamConditioningData').innerHTML=onClickHTMLStreamConditioningData;
 		
-		
-			// the json data.
-   		var feedDetails = [
-           {'Acquistion Point ID': '1', 'Event ID': 'Presidential Debate Live', 'Event Start': '2020-12-08',
-               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-12:30:00'
-           },
-           
-           {'Acquistion Point ID': '2', 'Event ID': 'Democratic National Convention Live', 'Event Start': '2020-12-08',
-               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-14:30:00'
-           },
-           
-           {'Acquistion Point ID': '3', 'Event ID': 'Meet the Press Live', 'Event Start': '2020-12-08',
-               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-16:30:00'
-           },
-           {'Acquistion Point ID': '4', 'Event ID': 'Vice Presidential Debate Live', 'Event Start': '2020-12-08',
-               'Event End': '2020-12-08', 'Status': 'CANCELED', 'Signal Time': '2020-12-08-18:30:00'
-           }
-       ]
+		// the json data.
+		var feedDetails = [
+           {'Event Signal Start Time': eventStartSignalTime, 'Event Signal End Time': eventEndSignalTime, 'Status': status}           
+      	]
 	    var divShowData = document.getElementById('streamConditioningData');
 	    divShowData.innerHTML = "";
 	    divShowData.appendChild(tableFromJson(feedDetails));
@@ -312,34 +336,16 @@ body {
           			'<div><b>Status        :</b> '+status+'</div>' + 
     	      	'</div>';
       }
-  function createCustomHTMLContentProg1() {
+  function createCustomHTMLContentProg(eventStartSignalTime, eventEndSignalTime, status) {
 	  return '<div style="white-space: nowrap;">' +
-      			'<div><b>Effective Time:</b> 12/08/2020 00:30 PT</div>' + 
-      			'<div><b>Expire Time   :</b> 12/08/2020 01:30 PT</div>' + 
-      			'<div><b>Status        :</b> Completed</div>' + 
+      			'<div><b>Effective Time:</b>'+ eventStartSignalTime+'</div>' + 
+      			'<div><b>Expire Time   :</b>'+ eventEndSignalTime +'</div>' + 
+      			'<div><b>Status        :</b>'+ status +'</div>' + 
 	      	'</div>';
   }
   
-  function createCustomHTMLContentProg2() {
-	  return '<div style="white-space: nowrap;">' +
-      			'<div><b>Effective Time:</b> 12/08/2020 02:30 PT</div>' + 
-      			'<div><b>Expire Time   :</b> 12/08/2020 03:30 PT</div>' + 
-      			'<div><b>Status        :</b> Completed</div>' + 
-	      	'</div>';
-  }
-  
-  function createCustomHTMLContentProg3() {
-	  return '<div style="white-space: nowrap;">' +
-      			'<div><b>Effective Time:</b> 12/08/2020 04:30 PT</div>' + 
-      			'<div><b>Expire Time   :</b> 12/08/2020 05:30 PT</div>' + 
-      			'<div><b>Status        :</b> Completed</div>' + 
-	      	'</div>';
-  }
-  
-  // my testing
  function tableFromJson(feedDetails) {
 	  // Extract value from table header. 
-      // ('Acquistion Point ID', 'Event ID', 'Category' and 'Price')
       var col = [];
       for (var i = 0; i < feedDetails.length; i++) {
           for (var key in feedDetails[i]) {
