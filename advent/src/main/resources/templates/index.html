@@ -181,43 +181,49 @@ body {
     dataTable.addColumn({ type: 'string', role: 'status' });
     dataTable.addColumn({ type: 'string', id: 'restrictedZips' });
     dataTable.addColumn({ type: 'string', id: 'restrictedDevices' });
+    dataTable.addColumn({ type: 'string', id: 'executionType' });
+    dataTable.addColumn({ type: 'string', id: 'altConId' });
     
     var arr = [];
     
     if(feedDataRow != null){
-  	   var altConDataLocal = feedDataRow.feedData.altConData;
+ 	   var altConDataLocal = feedDataRow.feedData.altConData;
        for(i = 0; i < altConDataLocal.length; i++){
-    	// get restricted zipcode information.
-    	var restrictedZipcodes = "";
-       	var restrictedZipcodeObjects = altConDataLocal[i].restrictedZips;
-       	for(j=0; j< restrictedZipcodeObjects.length; j++){
-       		restrictedZipcodes += restrictedZipcodeObjects[j].zipCode;
-       		if(j!= restrictedZipcodeObjects.length-1){
-       			restrictedZipcodes += ", ";
-       		}
-       	}
+	   		// get restricted zipcode information.
+	    	var restrictedZipcodes = "";
+	       	var restrictedZipcodeObjects = altConDataLocal[i].restrictedZips;
+	       	for(j=0; j< restrictedZipcodeObjects.length; j++){
+	       		restrictedZipcodes += restrictedZipcodeObjects[j].zipCode;
+	       		if(j!= restrictedZipcodeObjects.length-1){
+	       			restrictedZipcodes += ", ";
+	       		}
+	       	}
+	       	
+	       	//get restricted devices information
+	       	var restrictedDevices = "";
+	       	var restrictedDeviceObjects = altConDataLocal[i].restrictedDevices;
+	       	for(j=0; j< restrictedDeviceObjects.length; j++){
+	       		restrictedDevices += restrictedDeviceObjects[j];
+	       		if(j!= restrictedDeviceObjects.length-1){
+	       			restrictedDevices += ",";
+	       		}
+	       	}
        	
-       	//get restricted devices information
-       	var restrictedDevices = "";
-       	var restrictedDeviceObjects = altConDataLocal[i].restrictedDevices;
-       	for(j=0; j< restrictedDeviceObjects.length; j++){
-       		restrictedDevices += restrictedDeviceObjects[j];
-       		if(j!= restrictedDeviceObjects.length-1){
-       			restrictedDevices += ",";
-       		}
-       	}
-       	
-       	var programName = altConDataLocal[i].programName;
-       	var streamConditioningStatusDetails = altConDataLocal[i].streamConditioningStatus[0];
-    	var eventStartSignalTimeArr = streamConditioningStatusDetails.eventStartSignalTime.split(" ")[1].split(":");;
-      	var eventEndSignalTimeArr = streamConditioningStatusDetails.eventEndSignalTime.split(" ")[1].split(":");;
-      	var status = streamConditioningStatusDetails.status;
-      	var executionType = streamConditioningStatusDetails.executionType;
-      	arr.push(['Alternate Content', '/'+feedDataRow.feedName.toLowerCase()+'.com/media/'+programName, 
-      		createCustomHTMLContentProg(streamConditioningStatusDetails.eventStartSignalTime, streamConditioningStatusDetails.eventEndSignalTime, status),
-      		streamConditioningStatusDetails.eventStartSignalTime, streamConditioningStatusDetails.eventEndSignalTime, 
-      		new Date(0, 0, 0, eventStartSignalTimeArr[0], eventStartSignalTimeArr[1], eventStartSignalTimeArr[2]),
-      		new Date(0, 0, 0, eventEndSignalTimeArr[0], eventEndSignalTimeArr[1], eventEndSignalTimeArr[2]), status, restrictedZipcodes, restrictedDevices]);
+	       	var programName = altConDataLocal[i].programName;
+	       	for(k =0; k< altConDataLocal[i].streamConditioningStatus.length; k++){
+	       		var streamConditioningStatusDetails = altConDataLocal[i].streamConditioningStatus[k];
+	       		var eventStartSignalTimeArr = streamConditioningStatusDetails.eventStartSignalTime.split(" ")[1].split(":");;
+		      	var eventEndSignalTimeArr = streamConditioningStatusDetails.eventEndSignalTime.split(" ")[1].split(":");;
+		      	var status = streamConditioningStatusDetails.status;
+		      	var executionType = streamConditioningStatusDetails.executionType;
+		      	arr.push(['Alternate Content', null, 
+		      		createCustomHTMLContentProg(programName, streamConditioningStatusDetails.eventStartSignalTime, streamConditioningStatusDetails.eventEndSignalTime, status),
+		      		streamConditioningStatusDetails.eventStartSignalTime, streamConditioningStatusDetails.eventEndSignalTime, 
+		      		new Date(0, 0, 0, eventStartSignalTimeArr[0], eventStartSignalTimeArr[1], eventStartSignalTimeArr[2]),
+		      		new Date(0, 0, 0, eventEndSignalTimeArr[0], eventEndSignalTimeArr[1], eventEndSignalTimeArr[2]),
+		      		status, restrictedZipcodes, restrictedDevices, executionType,
+		      		'https://www.'+feedDataRow.feedName.toLowerCase()+'.com/media/'+programName]);
+	       	}
       } 
         
       var zoneBreakDataLocal = feedDataRow.feedData.zonedBreakData;
@@ -231,15 +237,13 @@ body {
  		 		createCustomHTMLContentProg1WithArg(zoneBreakDataItr[j].windowStartTime, zoneBreakDataItr[j].windowEndTime,zoneBreakDataItr[j].breakStatus),
  		 		zoneBreakDataItr[j].windowStartTime, zoneBreakDataItr[j].windowEndTime,
  		 		new Date(0, 0, 0, startHourMinutSecArr[0], startHourMinutSecArr[1],startHourMinutSecArr[2]),
- 		 		new Date(0, 0, 0, endHourMinutSecArr[0], endHourMinutSecArr[1],endHourMinutSecArr[2]), zoneBreakDataItr[j].breakStatus, null, null]);
+ 		 		new Date(0, 0, 0, endHourMinutSecArr[0], endHourMinutSecArr[1],endHourMinutSecArr[2]),
+ 		 		zoneBreakDataItr[j].breakStatus, null, null, null, null]);
 	   	}
    	  }
       dataTable.addRows(arr);
     }
     
-    //arr.push( [ 'Ad Breaks in Zone 2', null, 'Confirmed', new Date(2020,12,16,00,00,00), new Date(2020,12,16,00,00,30) ]);
-        
-
 	return dataTable;
   }
   
@@ -276,6 +280,8 @@ body {
 		var status = dataTable.getValue(chart.getSelection()[0].row, 7);
 		var restrictedZipcodes = dataTable.getValue(chart.getSelection()[0].row, 8);
 		var restrictedDevicesData = dataTable.getValue(chart.getSelection()[0].row, 9).split(",");
+		var executionType = dataTable.getValue(chart.getSelection()[0].row, 10);
+		var altConIdProgramName = dataTable.getValue(chart.getSelection()[0].row, 11);
 		
 		// Get restricted devices for selected altConData
 		var onClickHTMLRestrictedDevices="<b>Restricted Devices: </b>";
@@ -287,15 +293,14 @@ body {
 		// Get restricted zipcodes for selected altConData
 		var onClickHTMLRestrictedZips="<b>Restricted Zips: </b>" + restrictedZipcodes;
 		
-		var onClickHTMLAltConId="<b>Altcon ID: </b>" + dataTable.getValue(chart.getSelection()[0].row, 1);
+		var onClickHTMLAltConId="<b>Altcon ID: </b>" + altConIdProgramName;
 		document.getElementById('altConId').innerHTML=onClickHTMLAltConId;
 		document.getElementById('restrictedDevices').innerHTML=onClickHTMLRestrictedDevices;
 		document.getElementById('restrictedZips').innerHTML=onClickHTMLRestrictedZips;
-		//document.getElementById('streamConditioningData').innerHTML=onClickHTMLStreamConditioningData;
 		
 		// the json data.
 		var feedDetails = [
-           {'Event Signal Start Time': eventStartSignalTime, 'Event Signal End Time': eventEndSignalTime, 'Status': status}           
+           {'Platform Type': executionType, 'Event Signal Start Time': eventStartSignalTime, 'Event Signal End Time': eventEndSignalTime, 'Status': status}           
       	]
 	    var divShowData = document.getElementById('streamConditioningData');
 	    divShowData.innerHTML = "";
@@ -336,8 +341,9 @@ body {
           			'<div><b>Status        :</b> '+status+'</div>' + 
     	      	'</div>';
       }
-  function createCustomHTMLContentProg(eventStartSignalTime, eventEndSignalTime, status) {
+  function createCustomHTMLContentProg( programName, eventStartSignalTime, eventEndSignalTime, status) {
 	  return '<div style="white-space: nowrap;">' +
+	  			'<div><b>Program Name:</b>'+ programName+'</div>' + 
       			'<div><b>Effective Time:</b>'+ eventStartSignalTime+'</div>' + 
       			'<div><b>Expire Time   :</b>'+ eventEndSignalTime +'</div>' + 
       			'<div><b>Status        :</b>'+ status +'</div>' + 
