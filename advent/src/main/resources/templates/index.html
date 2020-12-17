@@ -157,81 +157,32 @@ th, td {
   
   function selectHandler(chart, dataTable) {
 	var onClickHTMLAltConId="<b>Altcon ID: </b>" + dataTable.getValue(chart.getSelection()[0].row, 1);
-	
-	var ccmsAdZone=	dataTable.getValue(chart.getSelection()[0].row, 0);
-	if(ccmsAdZone.indexOf("CCMS")!=-1){
-		var spotId = dataTable.getValue(chart.getSelection()[0].row, 1);
-		var status =	dataTable.getValue(chart.getSelection()[0].row, 2);
-		var windowStartTime=	dataTable.getValue(chart.getSelection()[0].row, 3);;
-		var windowEndTime=	dataTable.getValue(chart.getSelection()[0].row, 4);
-		
-		var divShowData = document.getElementById('streamConditioningData');
-		divShowData.innerHTML = "";
-		// the json data.
-   		var feedDetails = [
-           {'Hello Yaminee': '1', 'Event ID': 'Presidential Debate Live', 'Event Start': '2020-12-08',
-               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-12:30:00'
-           },
-           
-           {'Acquistion Point ID': '2', 'Event ID': 'Democratic National Convention Live', 'Event Start': '2020-12-08',
-               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-14:30:00'
-           },
-           
-           {'Acquistion Point ID': '3', 'Event ID': 'Meet the Press Live', 'Event Start': '2020-12-08',
-               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-16:30:00'
-           },
-           {'Acquistion Point ID': '4', 'Event ID': 'Vice Presidential Debate Live', 'Event Start': '2020-12-08',
-               'Event End': '2020-12-08', 'Status': 'CANCELED', 'Signal Time': '2020-12-08-18:30:00'
-           }
-       ]
-		divShowData.appendChild(tableFromJson(feedDetails));
-	}else{//Blackout
-		var onClickHTMLRestrictedDevices="<b>Restricted Devices: </b>";
-		var i;
-		for (i = 0; i < restrictedDevices.length; i++) {
-			onClickHTMLRestrictedDevices += "<img src='images/" + restrictedDevices[i] + ".png' width='50' height='50' title='" + restrictedDevices[i] + "'>";
-		}
-		var onClickHTMLRestrictedZips="<b>Restricted Zips: </b>";
-		for (i = 1; i < latlongMappings.length; i++) {
-			onClickHTMLRestrictedZips += latlongMappings[i][2];
-			if(i!=latlongMappings.length-1){
-				onClickHTMLRestrictedZips +=", ";
-			}
-		}
-		/* var onClickHTMLStreamConditioningData="<b><u>Stream Conditioning Details: </u></b><br/>";
-		onClickHTMLStreamConditioningData += "<table id='gable' border='1' width='100%'>";
-		onClickHTMLStreamConditioningData += "<tr><th>COUNTRY</th><th>LoC</th><th>BALANCE</th><th>DATE</th></tr>"; */
-		//onClickHTMLStreamConditioningData += "<tr><th>Stream Id</th><th>Event Started</th><th>Event Completed</th></tr>";
-		//onClickHTMLStreamConditioningData += "<tr><td></td><td></td><td></td></tr>";
-		//onClickHTMLStreamConditioningData += "</table>";
-		document.getElementById('altConId').innerHTML=onClickHTMLAltConId;
-		document.getElementById('restrictedDevices').innerHTML=onClickHTMLRestrictedDevices;
-		document.getElementById('restrictedZips').innerHTML=onClickHTMLRestrictedZips;
-		//document.getElementById('streamConditioningData').innerHTML=onClickHTMLStreamConditioningData;
-		
-		
-			// the json data.
-   		var feedDetails = [
-           {'Acquistion Point ID': '1', 'Event ID': 'Presidential Debate Live', 'Event Start': '2020-12-08',
-               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-12:30:00'
-           },
-           
-           {'Acquistion Point ID': '2', 'Event ID': 'Democratic National Convention Live', 'Event Start': '2020-12-08',
-               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-14:30:00'
-           },
-           
-           {'Acquistion Point ID': '3', 'Event ID': 'Meet the Press Live', 'Event Start': '2020-12-08',
-               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-16:30:00'
-           },
-           {'Acquistion Point ID': '4', 'Event ID': 'Vice Presidential Debate Live', 'Event Start': '2020-12-08',
-               'Event End': '2020-12-08', 'Status': 'CANCELED', 'Signal Time': '2020-12-08-18:30:00'
-           }
-       ]
-	    var divShowData = document.getElementById('streamConditioningData');
-	    divShowData.innerHTML = "";
-	    divShowData.appendChild(tableFromJson(feedDetails));
+	var onClickHTMLRestrictedDevices="<b>Restricted Devices: </b>";
+	var i;
+	for (i = 0; i < restrictedDevices.length; i++) {
+		onClickHTMLRestrictedDevices += "<img src='images/" + restrictedDevices[i] + ".png' width='50' height='50' title='" + restrictedDevices[i] + "'>";
 	}
+	var onClickHTMLRestrictedZips="<b>Restricted Zips: </b>";
+	for (i = 1; i < latlongMappings.length; i++) {
+		onClickHTMLRestrictedZips += latlongMappings[i][2];
+		if(i!=latlongMappings.length-1){
+			onClickHTMLRestrictedZips +=", ";
+		}
+	}
+	/* var onClickHTMLStreamConditioningData="<b><u>Stream Conditioning Details: </u></b><br/>";
+	onClickHTMLStreamConditioningData += "<table id='gable' border='1' width='100%'>";
+	onClickHTMLStreamConditioningData += "<tr><th>COUNTRY</th><th>LoC</th><th>BALANCE</th><th>DATE</th></tr>"; */
+	//onClickHTMLStreamConditioningData += "<tr><th>Stream Id</th><th>Event Started</th><th>Event Completed</th></tr>";
+	//onClickHTMLStreamConditioningData += "<tr><td></td><td></td><td></td></tr>";
+	//onClickHTMLStreamConditioningData += "</table>";
+	document.getElementById('altConId').innerHTML=onClickHTMLAltConId;
+	document.getElementById('restrictedDevices').innerHTML=onClickHTMLRestrictedDevices;
+	document.getElementById('restrictedZips').innerHTML=onClickHTMLRestrictedZips;
+	//document.getElementById('streamConditioningData').innerHTML=onClickHTMLStreamConditioningData;
 	
+    var divShowData = document.getElementById('streamConditioningData');
+    divShowData.innerHTML = "";
+    divShowData.appendChild(tableFromJson());
 
     google.charts.load('current', {
 	    'packages': ['geochart'],
@@ -290,8 +241,24 @@ th, td {
   }
   
   // my testing
- function tableFromJson(feedDetails) {
-
+ function tableFromJson() {
+	// the json data.
+   	var feedDetails = [
+           {'Acquistion Point ID': '1', 'Event ID': 'Presidential Debate Live', 'Event Start': '2020-12-08',
+               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-12:30:00'
+           },
+           
+           {'Acquistion Point ID': '2', 'Event ID': 'Democratic National Convention Live', 'Event Start': '2020-12-08',
+               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-14:30:00'
+           },
+           
+           {'Acquistion Point ID': '3', 'Event ID': 'Meet the Press Live', 'Event Start': '2020-12-08',
+               'Event End': '2020-12-08', 'Status': 'CONFIRMED', 'Signal Time': '2020-12-08-16:30:00'
+           },
+           {'Acquistion Point ID': '4', 'Event ID': 'Vice Presidential Debate Live', 'Event Start': '2020-12-08',
+               'Event End': '2020-12-08', 'Status': 'CANCELED', 'Signal Time': '2020-12-08-18:30:00'
+           }
+       ]
 
       // Extract value from table header. 
       // ('Acquistion Point ID', 'Event ID', 'Category' and 'Price')
