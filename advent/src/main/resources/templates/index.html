@@ -149,14 +149,14 @@ body {
 
 	// Set chart options
     var options = {
-					  title:'Linear Feed "Disney" Timeline for 12/08/2020.',
+ 				  title:'Linear Feed "Disney" Timeline for 12/08/2020.',
 		    	      timeline: { colorByRowLabel: true },
 		    	      backgroundColor: '#ffd',
 		    	      // This line makes the entire category's tooltip active.
 		    	      focusTarget: 'category',
 		    	      // Use an HTML tooltip.
-    	    	      tooltip: { isHtml: true },
-	    	      };
+   	    	      	  tooltip: { isHtml: true },
+  	    	      };
 	
     // Instantiate and draw our chart, passing in some options.
 	var container = document.getElementById('chart_div');
@@ -345,15 +345,15 @@ body {
 <body onload="loadFeedAndDateFields()">
 	<!--  Logo and Title -->
 	<div id="header"
-		style="background-color: black; color: white; padding: 10px;">
+		style="background-color: black; color: white; padding: 20px; padding-top:10px; padding-bottom: 10px;">
 		<img src="images/CadentLogo1.svg" />
 	</div>
 
 	<div id="title"
-		style="background-color: paleturquoise; color: blue; font-weight: bold;; font-size: 24px; padding: 10px;">Alternate
+		style="background-image: linear-gradient(black, darkgray);; color: white; font-weight: bold;; font-size: 24px; padding: 20px; padding-top:10px; padding-bottom: 10px;">Alternate
 		Contents & Ad Breaks</div>
 
-
+	<div id="content" style="margin: auto;padding: 20px; background-color: white;width: 96%; height: 100%;">
 	<!--Div that will hold the pie chart-->
 	<div id="filters">
 		<table width="50%">
@@ -370,7 +370,9 @@ body {
 			</tr>
 		</table>
 	</div>
-	<div id="chart_div"></div>
+	<div id="chart_div"></div> 
+	
+
 	<table width="100%">
 		<tr>
 			<td width="30%" valign="top">
@@ -408,6 +410,8 @@ body {
 			</td>
 		</tr>
 	</table>
+	
+	</div>
 	<script type="text/javascript" th:src="@{/js/jquery-3.1.0.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 </body>
