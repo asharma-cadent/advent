@@ -233,7 +233,7 @@ body {
 	  	for (j = 0; j < zoneBreakDataItr.length; j++) {    		 
    			var startHourMinutSecArr = zoneBreakDataItr[j].windowStartTime.split(" ")[1].split(":");
    			var endHourMinutSecArr = zoneBreakDataItr[j].windowEndTime.split(" ")[1].split(":");    			
- 		 	arr.push([ 'CCMS AdZone('+zoneLocal+")" , zoneBreakDataItr[j].spotId, 
+ 		 	arr.push([ 'CCMS AdZone('+zoneLocal+")" , "", 
  		 		createCustomHTMLContentProg1WithArg(zoneBreakDataItr[j].windowStartTime, zoneBreakDataItr[j].windowEndTime,zoneBreakDataItr[j].breakStatus, zoneBreakDataItr[j].spotId),
  		 		zoneBreakDataItr[j].windowStartTime, zoneBreakDataItr[j].windowEndTime,
  		 		new Date(0, 0, 0, startHourMinutSecArr[0], startHourMinutSecArr[1],startHourMinutSecArr[2]),
