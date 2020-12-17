@@ -188,6 +188,9 @@ body {
            }           
        ]
 		divShowData.appendChild(tableFromJson(feedDetails));
+   		var chart = document.getElementById('restrictedZipsGeoChart');
+   		chart.style.display = "none";
+
 	}else{//Blackout
 		var onClickHTMLRestrictedDevices="<b>Restricted Devices: </b>";
 		var i;
@@ -233,6 +236,8 @@ body {
 	    var divShowData = document.getElementById('streamConditioningData');
 	    divShowData.innerHTML = "";
 	    divShowData.appendChild(tableFromJson(feedDetails));
+	    var chart = document.getElementById('restrictedZipsGeoChart');
+   		chart.style.display = "block";
 	}
 
     google.charts.load('current', {
@@ -262,8 +267,8 @@ body {
   
     function createCustomHTMLContentProg1WithArg(startTime, stopTime, status) {
     	  return '<div style="white-space: nowrap;">' +
-          			'<div><b>Effective Time:</b> '+startTime+'</div>' + 
-          			'<div><b>Expire Time   :</b> '+stopTime+'</div>' + 
+          			'<div><b>Window Start Time:</b> '+startTime+'</div>' + 
+          			'<div><b>Window End Time   :</b> '+stopTime+'</div>' + 
           			'<div><b>Status        :</b> '+status+'</div>' + 
     	      	'</div>';
       }
