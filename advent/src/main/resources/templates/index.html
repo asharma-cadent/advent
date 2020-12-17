@@ -34,15 +34,59 @@ th, td {
         var bulletinDateField = document.getElementById("bulletin_date");
     	var selectedFeedValue = feedSelectField.value;
     	var selectedDateValue = bulletinDateField.value;
-    	alert(selectedFeedValue + selectedDateValue);
+    	var dateArray = selectedDateValue.split('-');
+    	var dateToCompare = dateArray[1] + '/' + dateArray[2] + '/' + dateArray[0];
+    	//Get the corresponding data from the feedJsonArray
+    	var feedDataRow = null
+    	if(feedJsonArray){
+        	var feedDataLength = feedJsonArray.length;
+        	for (var i = 0; i < feedDataLength; i++) {
+        	    feedDataRow = feedJsonArray[i];
+        	    if(feedDataRow.name == selectedFeedValue && dateToCompare == feedDataRow.date){
+        	    	break
+        	    }
+        	}
+        }
+    	//Call the methods that draw the charts with the feed data.
+    	alert("Feed Name: " + feedDataRow.feedName + ", Date:" + feedDataRow.date);
     }
     
     function loadFeedAndDateFields(){
         var feedSelectField = document.getElementById("feed_id");
         var bulletinDateField = document.getElementById("bulletin_date");
-        feedJsonArray
         var mySet = new Set();
-        var uniqueArray = Array.from(mySet);
+        var firstFeedName = null;
+        var firstFeedDataDate = null;
+        if(feedJsonArray){
+        	var feedDataLength = feedJsonArray.length;
+        	for (var i = 0; i < feedDataLength; i++) {
+        	    var feedDataRow = feedJsonArray[i];
+        	    mySet.add(feedDataRow.feedName);
+        	    if(firstFeedName == null){
+        	    	firstFeedName = feedDataRow.feedName;
+        	    	firstFeedDataDate = feedDataRow.date;
+        	    }
+        	}
+        } else {
+        	return;
+        }
+        var uniqueFeeds = Array.from(mySet);
+        var feedNamesSetSize = uniqueFeeds.length;
+        if(feedNamesSetSize && feedNamesSetSize > 0){
+	    	for (var i = 0; i < feedNamesSetSize; i++) {
+	            var opt = document.createElement('option');
+	            opt.value = uniqueFeeds[i];
+	            opt.innerHTML = uniqueFeeds[i];
+	            feedSelectField.appendChild(opt);
+	    	}
+        }
+        if(firstFeedName != null){
+        	feedSelectField.value = firstFeedName;
+        	var dateArray = firstFeedDataDate.split('/');
+        	bulletinDateField.value = dateArray[2] + '-' + dateArray[0] + '-' + dateArray[1];
+        }
+        
+        redrawTimeLine();
     }
         
 </script>
