@@ -180,6 +180,13 @@ body {
 				selectHandler(chartWrapper);
 			});
 		});
+	 	
+	  	google.visualization.events.addListener(control, 'statechange', function () {
+	        var v = control.getState();
+	        document.getElementById('dbgchart').innerHTML = "Chart Range: " + v.range.start.getHours() + ":" + v.range.start.getMinutes() + ":" + v.range.start.getSeconds() + 
+	        ' to ' + v.range.end.getHours() + ":" + v.range.end.getMinutes() + ":" + v.range.end.getSeconds();
+	        return 0;
+	    });
 	}
 
   // Callback that creates and populates a data table, instantiates the timeline chart, passes in the data and
@@ -487,6 +494,7 @@ body {
 					id="bulletin_date" name="bulletin_date"
 					onchange="processDateSelection()" />
 				</th>
+				<th><div id='dbgchart'></div></th>
 			</tr>
 		</table>
 	</div>
