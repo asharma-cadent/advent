@@ -181,6 +181,7 @@ body {
     dataTable.addColumn({ type: 'string', id: 'executionType' });
     dataTable.addColumn({ type: 'string', id: 'altConId' });
 	dataTable.addColumn({ type: 'string', id: 'style', role: 'style' });
+	dataTable.addColumn({ type: 'string', id: 'latlongJson'});
     
     var arr = [];
     
@@ -220,7 +221,7 @@ body {
 		      		new Date(0, 0, 0, eventStartSignalTimeArr[0], eventStartSignalTimeArr[1], eventStartSignalTimeArr[2]),
 		      		new Date(0, 0, 0, eventEndSignalTimeArr[0], eventEndSignalTimeArr[1], eventEndSignalTimeArr[2]),
 		      		status, restrictedZipcodes, restrictedDevices, executionType,
-		      		'https://www.'+feedDataRow.feedName.toLowerCase()+'.com/media/'+programName, getColor(status)]);
+		      		'https://www.'+feedDataRow.feedName.toLowerCase()+'.com/media/'+programName, getColor(status), JSON.stringify(restrictedZipcodeObjects)]);
 	       	}
       } 
         
@@ -236,7 +237,7 @@ body {
  		 		zoneBreakDataItr[j].windowStartTime, zoneBreakDataItr[j].windowEndTime,
  		 		new Date(0, 0, 0, startHourMinutSecArr[0], startHourMinutSecArr[1],startHourMinutSecArr[2]),
  		 		new Date(0, 0, 0, endHourMinutSecArr[0], endHourMinutSecArr[1],endHourMinutSecArr[2]),
- 		 		zoneBreakDataItr[j].breakStatus, null, null, null, zoneBreakDataItr[j].spotId, getColor(zoneBreakDataItr[j].breakStatus)]);
+ 		 		zoneBreakDataItr[j].breakStatus, null, null, null, zoneBreakDataItr[j].spotId, getColor(zoneBreakDataItr[j].breakStatus), null]);
 	   	}
    	  }
       dataTable.addRows(arr);
@@ -307,6 +308,7 @@ body {
 		var restrictedDevicesData = dataTable.getValue(chart.getSelection()[0].row, 9).split(",");
 		var executionType = dataTable.getValue(chart.getSelection()[0].row, 10);
 		var altConIdProgramName = dataTable.getValue(chart.getSelection()[0].row, 11);
+		var latlongMappings = dataTable.getValue(chart.getSelection()[0].row, 13);
 		
 		// Get restricted devices for selected altConData
 		var onClickHTMLRestrictedDevices="<b>Restricted Devices: </b>";
@@ -338,10 +340,10 @@ body {
 	    'packages': ['geochart'],
 	    'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
 	 });
-	 google.charts.setOnLoadCallback(drawMarkersMap);
+	 google.charts.setOnLoadCallback(function() { drawMarkersMap(latlongMappings); });
   }
   
-  function drawMarkersMap() {
+  function drawMarkersMap(latlongMappings) {
       var data = google.visualization.arrayToDataTable(latlongMappings);
 
       var options = {
