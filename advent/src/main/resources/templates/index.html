@@ -346,7 +346,16 @@ body {
   }
   
   function drawMarkersMap(latlongMappings) {
-      var data = google.visualization.arrayToDataTable(latlongMappings);
+	  var result = [];
+	  var latlongMappings = JSON.parse(latlongMappings);
+	  if(latlongMappings.length>0){
+		  result.push(["Latitude","Longitude","Zip Code"]);
+	  }
+	  for (j = 0; j < latlongMappings.length; j++) {    
+			result.push([latlongMappings[j].zipLatitude, latlongMappings[j].zipLongitude, latlongMappings[j].zipCode]);	  			
+	  }
+	  
+      var data = google.visualization.arrayToDataTable(result);
 
       var options = {
         region: 'US',
