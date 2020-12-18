@@ -5434,7 +5434,8 @@
           ],
           "restrictedDevices": [
             "TABLET",
-            "PHONE"
+            "PHONE",
+            "PC"
           ],
           "streamConditioningStatus": [
             {
@@ -5477,7 +5478,7 @@
           ],
           "restrictedDevices": [
             "TABLET",
-            "PHONE"
+            "PC"
           ],
           "streamConditioningStatus": [
             {
@@ -5519,7 +5520,7 @@
             }
           ],
           "restrictedDevices": [
-            "TABLET",
+            "PC",
             "PHONE"
           ],
           "streamConditioningStatus": [
@@ -5563,7 +5564,8 @@
           ],
           "restrictedDevices": [
             "TABLET",
-            "PHONE"
+            "PHONE",
+            "PC"
           ],
           "streamConditioningStatus": [
             {
@@ -11066,7 +11068,6 @@
             }
           ],
           "restrictedDevices": [
-            "TABLET",
             "PHONE"
           ],
           "streamConditioningStatus": [
@@ -11110,7 +11111,8 @@
           ],
           "restrictedDevices": [
             "TABLET",
-            "PHONE"
+            "PHONE",
+            "PC"
           ],
           "streamConditioningStatus": [
             {
@@ -11153,7 +11155,7 @@
           ],
           "restrictedDevices": [
             "TABLET",
-            "PHONE"
+            "PC"
           ],
           "streamConditioningStatus": [
             {
@@ -11195,7 +11197,6 @@
             }
           ],
           "restrictedDevices": [
-            "TABLET",
             "PHONE"
           ],
           "streamConditioningStatus": [
@@ -11239,7 +11240,7 @@
           ],
           "restrictedDevices": [
             "TABLET",
-            "PHONE"
+            "PC"
           ],
           "streamConditioningStatus": [
             {
