@@ -5,9 +5,9 @@ How to run this application in your local environment.
 
 ## Install the following tools in your local environment.
 
-- Git client
-- Maven
-- Java 8
+- Git client (On Centos: sudo yum install git)
+- Maven (On Centos: sudo yum install maven)
+- Java 8 (On Centos: Gets installed with maven in the above command)
 
 ## Perform the following steps:
 
