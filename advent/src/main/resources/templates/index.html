@@ -159,7 +159,7 @@ body {
 	 	// Add our selection handler.
 	 	google.visualization.events.addListener(chartWrapper , 'ready', function(){
 		    google.visualization.events.addListener(chartWrapper ,'select', function() {
-				selectHandler(chartWrapper.getChart(), dataTable);
+				selectHandler(chartWrapper);
 			});
 		});
 	}
@@ -273,7 +273,9 @@ body {
 	  
 	  return result;
 	}
-  function selectHandler(chart, dataTable) {
+  function selectHandler(chartWrapper) {
+	var chart = chartWrapper.getChart();
+	var dataTable = chartWrapper.getDataTable();
 	var ccmsAdZone=	dataTable.getValue(chart.getSelection()[0].row, 0);
 	if(ccmsAdZone.indexOf("CCMS")!=-1){
 		var spotId = dataTable.getValue(chart.getSelection()[0].row, 11);
