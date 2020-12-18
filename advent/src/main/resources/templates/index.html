@@ -19,6 +19,21 @@ body {
     background-clip: initial;
     background-color: rgb(227, 228, 232);
 }
+
+#legend_div {
+  text-align: center;
+}
+
+.legend-marker {
+  display: inline-block;
+  padding: 16px 4px 8px 4px;
+}
+
+.legend-marker-color {
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+}
 </style>
 <title>Linear Feed Timeline</title>
 <script type="text/javascript" th:inline="javascript">
@@ -126,7 +141,6 @@ body {
 			  colors.push(colorMap[dataTable.getValue(i, 7)]);
 		}
 		
-		var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
 		var control = new google.visualization.ControlWrapper(
 				{
 					'controlType': 'ChartRangeFilter',
@@ -172,10 +186,47 @@ body {
        					'columns': [0, 7, 2, 5, 6]
    					}
 				});
-	    dashboard.bind(control, chartWrapper);
-	    dashboard.draw(dataTable);
+		
+		  // add legend marker
+		  function addLegendMarker(markerProps) {
+		    var legendMarker = document.getElementById('template-legend-marker').innerHTML;
+		    for (var handle in markerProps) {
+		      if (markerProps.hasOwnProperty(handle)) {
+		        legendMarker = legendMarker.replace('{{' + handle + '}}', markerProps[handle]);
+		      }
+		    }
+		    document.getElementById('legend_div').insertAdjacentHTML('beforeEnd', legendMarker);
+		  }
+		
 	 	// Add our selection handler.
 	 	google.visualization.events.addListener(chartWrapper , 'ready', function(){
+	 	    var legend = document.getElementById('legend_div');
+	 	    var dataTable = chartWrapper.getDataTable();
+			//set fixed colors
+			var colors = [];
+			var colorMap = new Map();
+			colorMap.set('CONFIRMED','#008000');
+			colorMap.set('PENDING','#6699cc');
+			colorMap.set('CANCELLED','#FFA500');
+			colorMap.set('ERROR','#ff5349');
+			colorMap.set('COMPLETE','#008000');
+			console.log(dataTable.toJSON());
+			for (var i = 0; i < dataTable.getNumberOfRows(); i++) {
+				colors.push(colorMap.get(dataTable.getValue(i, 7)));
+			}
+			chartWrapper.setOption('colors', colors);
+			
+	 	    // clear previous legend
+	 	    legend.innerHTML = '';
+
+	 	    colorMap.forEach(function(value, key) {
+		 	      var markerProps = {};
+		 	      markerProps.index = i;
+		 	      markerProps.color = value;
+		 	      markerProps.label = key;
+		 	      addLegendMarker(markerProps);
+			})
+	 	    
 		    google.visualization.events.addListener(chartWrapper ,'select', function() {
 				selectHandler(chartWrapper);
 			});
@@ -187,6 +238,10 @@ body {
 	        ' to ' + v.range.end.getHours() + ":" + v.range.end.getMinutes() + ":" + v.range.end.getSeconds();
 	        return 0;
 	    });
+	  	
+		var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
+	    dashboard.bind(control, chartWrapper);
+	    dashboard.draw(dataTable);
 	}
 
   // Callback that creates and populates a data table, instantiates the timeline chart, passes in the data and
@@ -288,32 +343,6 @@ body {
   }
   
 
-  function getColor(status) {
-	  var green='#008000';
-	  var orange='#FFA500';
-	  var red='#ff5349';
-	  var grey='#808080';
-	  var blue='#6699cc';
-	  var result=green;
-	  if(status.toUpperCase()==='CONFIRMED'.toUpperCase()){
-		  result = green;
-	  }
-	  if(status.toUpperCase()==='PENDING'.toUpperCase()){
-		  result = blue;
-	  }
-	  if(status.toUpperCase()==='CANCELLED'.toUpperCase()){
-		  result = orange;
-	  }
-	  if(status.toUpperCase()==='ERROR'.toUpperCase()){
-		  result = red;
-	  }
-	  if(status.toUpperCase()==='COMPLETE'.toUpperCase()){
-		  result = green;
-	  }
-	 
-	  
-	  return result;
-	}
   function selectHandler(chartWrapper) {
 	var chart = chartWrapper.getChart();
 	var dataTable = chartWrapper.getDataTable();
@@ -499,9 +528,10 @@ body {
 		</table>
 	</div>
 		<div id="dashboard_div">
-    	<div id="chart_div"></div>
-        <div id="control_div"></div>
-    </div> 
+	    	<div id="chart_div"></div>
+	    	<div id="legend_div"></div>
+	        <div id="control_div"></div>
+	    </div> 
 
 	<table width="100%">
 		<tr>
@@ -544,6 +574,14 @@ body {
 	</div>
 	<script type="text/javascript" th:src="@{/js/jquery-3.1.0.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+	
+<!-- template for building marker -->
+<script id="template-legend-marker" type="text/html">
+  <div class="legend-marker" data-columnIndex="{{index}}">
+    <div class="legend-marker-color" style="background-color: {{color}}"></div>
+    <span>{{label}}</span>
+  </div>
+</script>
 </body>
 
 </html>
