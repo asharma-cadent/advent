@@ -109,6 +109,23 @@ body {
 		if(!feedDataRow){
 			  return;
 		}
+		
+		var dataTable = getDataTable(feedDataRow);
+		
+		//set fixed colors
+		var colors = [];
+		var colorMap = {
+					        'CONFIRMED': '#008000',
+					        'PENDING'  : '#6699cc',
+					        'CANCELLED': '#FFA500',
+					        'ERROR':'#ff5349',
+					        'COMPLETE':'#008000'
+					    };
+		
+		for (var i = 0; i < dataTable.getNumberOfRows(); i++) {      
+			  colors.push(colorMap[dataTable.getValue(i, 7)]);
+		}
+		
 		var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
 		var control = new google.visualization.ControlWrapper(
 				{
@@ -123,7 +140,7 @@ body {
 			                                	'height': 60,
 		   									 },
 		       								'chartView':{
-		           								'columns': [5,6]
+		           								'columns': [5, 6]
 		       								},
 		       								'chartArea': {
 		       			                        'width': '80%'
@@ -145,16 +162,17 @@ body {
      	    	    				'axisTitlesPosition': 'out',
      	    	    				'chartArea': {
      	    	                        'width': '80%'
-     	    	                    }
-									/* ,
-									 timeline: { singleColor: '#6190d0' } */
+     	    	                    },
+     	    	                    'colors': colors,
+     	    	                  	'avoidOverlappingGridLines': true
+								/*  ,timeline: { singleColor: '#6190d0' } */ //To make bars single color.
+     	    	    			/*	,timeline: { showBarLabels: false}    */ //To hide bar labels.
 								},
        				'view': {
-       					'columns': [0, 1, 2, 3, 4, 5, 6, 7, 12]
+       					'columns': [0, 7, 2, 5, 6]
    					}
 				});
 	    dashboard.bind(control, chartWrapper);
-	    var dataTable = getDataTable(feedDataRow);
 	    dashboard.draw(dataTable);
 	 	// Add our selection handler.
 	 	google.visualization.events.addListener(chartWrapper , 'ready', function(){
@@ -168,20 +186,19 @@ body {
   // draws it.
   function getDataTable(feedDataRow) {
     var dataTable = new google.visualization.DataTable();
-    dataTable.addColumn({ type: 'string', id: 'Position' });
-    dataTable.addColumn({ type: 'string', id: 'Name' });
-    dataTable.addColumn({ type: 'string', role: 'tooltip' });
-    dataTable.addColumn({ type: 'string', role: 'windowStartTime' });
-    dataTable.addColumn({ type: 'string', role: 'windowEndTime' });    
-    dataTable.addColumn({ type: 'date', id: 'Start' });
-    dataTable.addColumn({ type: 'date', id: 'End' });
-    dataTable.addColumn({ type: 'string', role: 'status' });
-    dataTable.addColumn({ type: 'string', id: 'restrictedZips' });
-    dataTable.addColumn({ type: 'string', id: 'restrictedDevices' });
-    dataTable.addColumn({ type: 'string', id: 'executionType' });
-    dataTable.addColumn({ type: 'string', id: 'altConId' });
-	dataTable.addColumn({ type: 'string', id: 'style', role: 'style' });
-	dataTable.addColumn({ type: 'string', id: 'latlongJson'});
+    dataTable.addColumn({ type: 'string', id: 'Position' });  //0
+    dataTable.addColumn({ type: 'string', id: 'Name' }); //1
+    dataTable.addColumn({ type: 'string', role: 'tooltip' }); //2
+    dataTable.addColumn({ type: 'string', id: 'windowStartTime' }); //3
+    dataTable.addColumn({ type: 'string', id: 'windowEndTime' });  //4
+    dataTable.addColumn({ type: 'date', id: 'Start' }); //5
+    dataTable.addColumn({ type: 'date', id: 'End' }); //6
+    dataTable.addColumn({ type: 'string', id: 'status' }); //7
+    dataTable.addColumn({ type: 'string', id: 'restrictedZips' }); //8
+    dataTable.addColumn({ type: 'string', id: 'restrictedDevices' }); //9
+    dataTable.addColumn({ type: 'string', id: 'executionType' }); //10
+    dataTable.addColumn({ type: 'string', id: 'altConId' });	//11
+	dataTable.addColumn({ type: 'string', id: 'latlongJson'});  //12
     
     var arr = [];
     
@@ -215,13 +232,21 @@ body {
 		      	var eventEndSignalTimeArr = streamConditioningStatusDetails.eventEndSignalTime.split(" ")[1].split(":");;
 		      	var status = streamConditioningStatusDetails.status;
 		      	var executionType = streamConditioningStatusDetails.executionType;
-		      	arr.push(['Alternate Content', null, 
-		      		createCustomHTMLContentProg(programName, streamConditioningStatusDetails.eventStartSignalTime, streamConditioningStatusDetails.eventEndSignalTime, status),
-		      		streamConditioningStatusDetails.eventStartSignalTime, streamConditioningStatusDetails.eventEndSignalTime, 
-		      		new Date(0, 0, 0, eventStartSignalTimeArr[0], eventStartSignalTimeArr[1], eventStartSignalTimeArr[2]),
-		      		new Date(0, 0, 0, eventEndSignalTimeArr[0], eventEndSignalTimeArr[1], eventEndSignalTimeArr[2]),
-		      		status, restrictedZipcodes, restrictedDevices, executionType,
-		      		'https://www.'+feedDataRow.feedName.toLowerCase()+'.com/media/'+programName, getColor(status), JSON.stringify(restrictedZipcodeObjects)]);
+		      	arr.push([
+		      		'Alternate Content', //0
+		      		'', //1
+		      		createCustomHTMLContentProg(programName, streamConditioningStatusDetails.eventStartSignalTime, streamConditioningStatusDetails.eventEndSignalTime, status),//2
+		      		streamConditioningStatusDetails.eventStartSignalTime, //3
+		      		streamConditioningStatusDetails.eventEndSignalTime, //4
+		      		new Date(0, 0, 0, eventStartSignalTimeArr[0], eventStartSignalTimeArr[1], eventStartSignalTimeArr[2]),//5
+		      		new Date(0, 0, 0, eventEndSignalTimeArr[0], eventEndSignalTimeArr[1], eventEndSignalTimeArr[2]),//6
+		      		status, //7
+		      		restrictedZipcodes,//8 
+		      		restrictedDevices, //9
+		      		executionType,//10
+		      		'https://www.'+feedDataRow.feedName.toLowerCase()+'.com/media/'+programName,//11 
+		      		JSON.stringify(restrictedZipcodeObjects)//12
+		      		]);
 	       	}
       } 
         
@@ -232,12 +257,21 @@ body {
 	  	for (j = 0; j < zoneBreakDataItr.length; j++) {    		 
    			var startHourMinutSecArr = zoneBreakDataItr[j].windowStartTime.split(" ")[1].split(":");
    			var endHourMinutSecArr = zoneBreakDataItr[j].windowEndTime.split(" ")[1].split(":");    			
- 		 	arr.push([ 'CCMS AdZone('+zoneLocal+")" , "", 
- 		 		createCustomHTMLContentProg1WithArg(zoneBreakDataItr[j].windowStartTime, zoneBreakDataItr[j].windowEndTime,zoneBreakDataItr[j].breakStatus, zoneBreakDataItr[j].spotId),
- 		 		zoneBreakDataItr[j].windowStartTime, zoneBreakDataItr[j].windowEndTime,
- 		 		new Date(0, 0, 0, startHourMinutSecArr[0], startHourMinutSecArr[1],startHourMinutSecArr[2]),
- 		 		new Date(0, 0, 0, endHourMinutSecArr[0], endHourMinutSecArr[1],endHourMinutSecArr[2]),
- 		 		zoneBreakDataItr[j].breakStatus, null, null, null, zoneBreakDataItr[j].spotId, getColor(zoneBreakDataItr[j].breakStatus), null]);
+ 		 	arr.push([ 
+ 		 		'CCMS AdZone('+zoneLocal+")" , //0
+ 		 		"", //1
+ 		 		createCustomHTMLContentProg1WithArg(zoneBreakDataItr[j].windowStartTime, zoneBreakDataItr[j].windowEndTime,zoneBreakDataItr[j].breakStatus, zoneBreakDataItr[j].spotId),//2
+ 		 		zoneBreakDataItr[j].windowStartTime, //3
+ 		 		zoneBreakDataItr[j].windowEndTime,//4
+ 		 		new Date(0, 0, 0, startHourMinutSecArr[0], startHourMinutSecArr[1],startHourMinutSecArr[2]),//5
+ 		 		new Date(0, 0, 0, endHourMinutSecArr[0], endHourMinutSecArr[1],endHourMinutSecArr[2]),//6
+ 		 		zoneBreakDataItr[j].breakStatus, //7
+ 		 		null,//8 
+ 		 		null,//9
+ 		 		null,//10 
+ 		 		zoneBreakDataItr[j].spotId,//11  
+ 		 		null//12
+ 		 		]);
 	   	}
    	  }
       dataTable.addRows(arr);
@@ -310,7 +344,7 @@ body {
 		var restrictedDevicesData = dataTable.getValue(chart.getSelection()[0].row, 9).split(",");
 		var executionType = dataTable.getValue(chart.getSelection()[0].row, 10);
 		var altConIdProgramName = dataTable.getValue(chart.getSelection()[0].row, 11);
-		var latlongMappings = dataTable.getValue(chart.getSelection()[0].row, 13);
+		var latlongMappings = dataTable.getValue(chart.getSelection()[0].row, 12);
 		
 		// Get restricted devices for selected altConData
 		var onClickHTMLRestrictedDevices="<b>Restricted Devices: </b>";
