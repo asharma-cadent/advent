@@ -234,8 +234,13 @@ body {
 	 	
 	  	google.visualization.events.addListener(control, 'statechange', function () {
 	        var v = control.getState();
-	        document.getElementById('dbgchart').innerHTML = "Chart Range: " + v.range.start.getHours() + ":" + v.range.start.getMinutes() + ":" + v.range.start.getSeconds() + 
-	        ' to ' + v.range.end.getHours() + ":" + v.range.end.getMinutes() + ":" + v.range.end.getSeconds();
+	        document.getElementById('dbgchart').innerHTML = 
+	        	"Chart Range: " + ("0" + v.range.start.getHours()).slice(-2) + 
+	        	":" + ("0" + v.range.start.getMinutes()).slice(-2) + 
+	        	":" + ("0" + v.range.start.getSeconds()).slice(-2) + 
+	        	' to ' + ("0" + v.range.end.getHours()).slice(-2) + 
+	        	":" + ("0" + v.range.end.getMinutes()).slice(-2) + 
+	        	":" + ("0" + v.range.end.getSeconds()).slice(-2);
 	        return 0;
 	    });
 	  	
