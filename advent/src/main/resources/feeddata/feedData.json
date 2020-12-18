@@ -8073,7 +8073,7 @@
               "windowEndTime": "12/18/2020 08:03:00.000 GMT",
               "breakNumberWithinWindow": "01",
               "positionNumberWithinBreak": "01",
-              "spotId": "900",
+              "spotId": "800",
               "creative": "CHEVROLET NE/NCC",
               "breakConfirmationTime": "12/18/2020 08:00:00.000 GMT",
               "breakStatus": "ERROR"
@@ -8086,7 +8086,7 @@
               "windowEndTime": "12/18/2020 08:13:00.000 GMT",
               "breakNumberWithinWindow": "01",
               "positionNumberWithinBreak": "01",
-              "spotId": "901",
+              "spotId": "801",
               "creative": "Honda_Civic_TV2244",
               "breakConfirmationTime": "12/18/2020 08:10:00.000 GMT",
               "breakStatus": "ERROR"
@@ -8099,7 +8099,7 @@
               "windowEndTime": "12/18/2020 08:23:00.000 GMT",
               "breakNumberWithinWindow": "01",
               "positionNumberWithinBreak": "01",
-              "spotId": "902",
+              "spotId": "802",
               "creative": "CHEVY_BUICK_BFRMAY17TVRR1",
               "breakConfirmationTime": "12/18/2020 08:20:00.000 GMT",
               "breakStatus": "ERROR"
@@ -8112,7 +8112,7 @@
               "windowEndTime": "12/18/2020 08:33:00.000 GMT",
               "breakNumberWithinWindow": "01",
               "positionNumberWithinBreak": "01",
-              "spotId": "903",
+              "spotId": "803",
               "creative": "SA_RRLUVT70556_TOYOTA",
               "breakConfirmationTime": "12/18/2020 08:30:00.000 GMT",
               "breakStatus": "CONFIRMED"
@@ -8125,7 +8125,7 @@
               "windowEndTime": "12/18/2020 08:43:00.000 GMT",
               "breakNumberWithinWindow": "01",
               "positionNumberWithinBreak": "01",
-              "spotId": "904",
+              "spotId": "804",
               "creative": "KIA_NFN_Sorento_269",
               "breakConfirmationTime": "12/18/2020 08:40:00.000 GMT",
               "breakStatus": "CONFIRMED"
@@ -8138,7 +8138,7 @@
               "windowEndTime": "12/18/2020 08:53:00.000 GMT",
               "breakNumberWithinWindow": "01",
               "positionNumberWithinBreak": "01",
-              "spotId": "905",
+              "spotId": "805",
               "creative": "FORD8996IH",
               "breakConfirmationTime": "12/18/2020 08:50:00.000 GMT",
               "breakStatus": "CONFIRMED"
@@ -9872,7 +9872,7 @@
               "windowEndTime": "12/18/2020 08:03:00.000 GMT",
               "breakNumberWithinWindow": "01",
               "positionNumberWithinBreak": "01",
-              "spotId": "900",
+              "spotId": "700",
               "creative": "CHEVROLET NE/NCC",
               "breakConfirmationTime": "12/18/2020 08:00:00.000 GMT",
               "breakStatus": "ERROR"
@@ -9885,7 +9885,7 @@
               "windowEndTime": "12/18/2020 08:13:00.000 GMT",
               "breakNumberWithinWindow": "01",
               "positionNumberWithinBreak": "01",
-              "spotId": "901",
+              "spotId": "701",
               "creative": "Honda_Civic_TV2244",
               "breakConfirmationTime": "12/18/2020 08:10:00.000 GMT",
               "breakStatus": "ERROR"
@@ -9898,7 +9898,7 @@
               "windowEndTime": "12/18/2020 08:23:00.000 GMT",
               "breakNumberWithinWindow": "01",
               "positionNumberWithinBreak": "01",
-              "spotId": "902",
+              "spotId": "702",
               "creative": "CHEVY_BUICK_BFRMAY17TVRR1",
               "breakConfirmationTime": "12/18/2020 08:20:00.000 GMT",
               "breakStatus": "ERROR"
@@ -9911,7 +9911,7 @@
               "windowEndTime": "12/18/2020 08:33:00.000 GMT",
               "breakNumberWithinWindow": "01",
               "positionNumberWithinBreak": "01",
-              "spotId": "903",
+              "spotId": "703",
               "creative": "SA_RRLUVT70556_TOYOTA",
               "breakConfirmationTime": "12/18/2020 08:30:00.000 GMT",
               "breakStatus": "PENDING"
@@ -9924,7 +9924,7 @@
               "windowEndTime": "12/18/2020 08:43:00.000 GMT",
               "breakNumberWithinWindow": "01",
               "positionNumberWithinBreak": "01",
-              "spotId": "904",
+              "spotId": "704",
               "creative": "KIA_NFN_Sorento_269",
               "breakConfirmationTime": "12/18/2020 08:40:00.000 GMT",
               "breakStatus": "PENDING"
@@ -9937,7 +9937,7 @@
               "windowEndTime": "12/18/2020 08:53:00.000 GMT",
               "breakNumberWithinWindow": "01",
               "positionNumberWithinBreak": "01",
-              "spotId": "905",
+              "spotId": "705",
               "creative": "FORD8996IH",
               "breakConfirmationTime": "12/18/2020 08:50:00.000 GMT",
               "breakStatus": "PENDING"
